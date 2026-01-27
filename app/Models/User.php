@@ -23,6 +23,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_active',
     ];
 
     /**
@@ -45,6 +46,23 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
         ];
+    }
+
+    /**
+     * Get the cases assigned to the user.
+     */
+    public function cases()
+    {
+        return $this->hasMany(CaseModel::class);
+    }
+
+    /**
+     * Get the distributions created by the user.
+     */
+    public function distributions()
+    {
+        return $this->hasMany(\App\Models\AidDistribution::class);
     }
 }

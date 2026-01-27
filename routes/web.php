@@ -15,10 +15,14 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\BoardMemberController;
 use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\DonationRequestController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\TermsAndConditionsController;
+use App\Http\Controllers\Admin\DistributionTypeController;
 use App\Http\Controllers\SiteController;
 
 Route::get('/', [SiteController::class, 'home'])->name('site.home');
 Route::get('/about', [SiteController::class, 'about'])->name('site.about');
+Route::get('/terms-and-conditions', [SiteController::class, 'termsAndConditions'])->name('site.terms-and-conditions');
 Route::get('/services', [SiteController::class, 'services'])->name('site.services');
 Route::get('/services/{service:slug}', [SiteController::class, 'serviceShow'])->name('site.services.show');
 Route::get('/news', [SiteController::class, 'news'])->name('site.news');
@@ -37,6 +41,11 @@ Route::middleware('auth')
     ->name('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+        
+        // Reports and Filters
+        Route::get('reports', [ReportController::class, 'index'])->name('reports');
+        Route::get('api/cases', [ReportController::class, 'getCases'])->name('api.cases');
+        
         Route::resource('areas', AreaController::class)->except(['show']);
         Route::resource('case-types', CaseTypeController::class)->except(['show']);
         Route::resource('users', UserController::class)->except(['show']);
@@ -44,9 +53,11 @@ Route::middleware('auth')
         Route::resource('permissions', PermissionController::class)->except(['show']);
         Route::get('cases-export', [CaseController::class, 'exportExcel'])->name('cases.export');
         Route::get('cases-export-pdf', [CaseController::class, 'exportPdf'])->name('cases.export-pdf');
+        Route::get('cases-print-all', [CaseController::class, 'printAllCards'])->name('cases.print-all');
         Route::post('cases-import', [CaseController::class, 'import'])->name('cases.import');
         Route::get('cases/{case}/card', [CaseController::class, 'card'])->name('cases.card');
-        Route::resource('cases', CaseController::class)->except(['show']);
+        Route::resource('cases', CaseController::class);
+        Route::resource('distribution-types', DistributionTypeController::class)->except(['show']);
         Route::get('distributions-export', [AidDistributionController::class, 'exportExcel'])->name('distributions.export');
         Route::get('distributions-export-pdf', [AidDistributionController::class, 'exportPdf'])->name('distributions.export-pdf');
         Route::resource('distributions', AidDistributionController::class)->only(['index', 'create', 'store']);
@@ -56,6 +67,8 @@ Route::middleware('auth')
         Route::resource('board-members', BoardMemberController::class)->except(['show']);
         Route::get('about', [AboutController::class, 'edit'])->name('about.edit');
         Route::put('about', [AboutController::class, 'update'])->name('about.update');
+        Route::get('terms-and-conditions', [TermsAndConditionsController::class, 'edit'])->name('terms-and-conditions.edit');
+        Route::put('terms-and-conditions', [TermsAndConditionsController::class, 'update'])->name('terms-and-conditions.update');
         Route::resource('contact-messages', ContactMessageController::class)->only(['index', 'show', 'destroy']);
         Route::resource('donation-requests', DonationRequestController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
     });

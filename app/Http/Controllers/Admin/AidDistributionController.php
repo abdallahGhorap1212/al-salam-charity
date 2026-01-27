@@ -39,7 +39,9 @@ class AidDistributionController extends Controller
         $result = $this->aidDistributionService->createForBarcode(
             $data['barcode'],
             $data['notes'] ?? null,
-            $request->boolean('confirm_override')
+            $request->boolean('confirm_override'),
+            $data['distribution_type_id'] ?? null,
+            $data['amount'] ?? null
         );
 
         if (!empty($result['error'])) {

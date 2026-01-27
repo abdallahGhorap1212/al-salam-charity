@@ -22,13 +22,14 @@ class CaseController extends Controller
         private readonly CaseTypeService $caseTypeService
     ) {
         $this->middleware('auth');
-        $this->middleware('permission:view-cases')->only(['index']);
+        $this->middleware('auth');
+        $this->middleware('permission:view-cases')->only(['index', 'show']);
         $this->middleware('permission:create-cases')->only(['create', 'store']);
         $this->middleware('permission:edit-cases')->only(['edit', 'update']);
         $this->middleware('permission:delete-cases')->only(['destroy']);
         $this->middleware('permission:import-cases')->only(['import']);
         $this->middleware('permission:export-cases')->only(['exportExcel', 'exportPdf']);
-        $this->middleware('permission:print-cases')->only(['card']);
+        $this->middleware('permission:print-cases')->only(['card', 'printAllCards']);
     }
 
     public function index(Request $request): View
@@ -56,9 +57,28 @@ class CaseController extends Controller
             ->with('success', 'تم إنشاء الحالة بنجاح.');
     }
 
-    public function show(string $id)
+    public function show(CaseModel $case): View
     {
-        abort(404);
+        $case->load([
+            'area',
+            'caseType',
+            'user',
+            'aidDistributions' => function ($query) {
+                $query->latest('distribution_date')->with('type', 'user');
+            },
+        ]);
+
+        // Calculate statistics
+        $totalDistributions = $case->aidDistributions->count();
+        $lastDistribution = $case->aidDistributions->first();
+        $firstDistribution = $case->aidDistributions->last();
+
+        return view('admin.cases.show', compact(
+            'case',
+            'totalDistributions',
+            'lastDistribution',
+            'firstDistribution'
+        ));
     }
 
     public function edit(CaseModel $case): View
@@ -113,5 +133,11 @@ class CaseController extends Controller
         $barcodeUrl = $this->caseService->createBarcodeImage($case);
 
         return view('admin.cases.card', compact('case', 'barcodeUrl'));
+    }
+
+    public function printAllCards()
+    {
+        $casesData = $this->caseService->printAllCards();
+        return view('admin.cases.cards-bulk', compact('casesData'));
     }
 }

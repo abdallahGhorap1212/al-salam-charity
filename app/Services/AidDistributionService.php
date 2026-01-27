@@ -27,7 +27,7 @@ class AidDistributionService
         return $this->aidDistributionRepository->filterByDates($from, $to, $perPage);
     }
 
-    public function createForBarcode(string $barcode, ?string $notes, bool $confirmOverride): array
+    public function createForBarcode(string $barcode, ?string $notes, bool $confirmOverride, ?int $distributionTypeId = null, ?float $amount = null): array
     {
         $case = CaseModel::where('barcode', $barcode)->first();
         if (! $case) {
@@ -52,7 +52,10 @@ class AidDistributionService
         AidDistribution::create([
             'case_id' => $case->id,
             'user_id' => Auth::id(),
+            'distribution_type_id' => $distributionTypeId,
             'distribution_date' => now(),
+            'amount' => $amount,
+            'currency' => 'EGP',
             'notes' => $notes,
         ]);
 

@@ -60,6 +60,7 @@
                         <li><a href="{{ route('site.about') }}">نبذة عن الجمعية</a></li>
                         <li><a href="{{ route('site.services') }}">خدماتنا</a></li>
                         <li><a href="{{ route('site.news') }}">الأخبار</a></li>
+                        <li><a href="{{ route('site.terms-and-conditions') }}">الشروط والأحكام</a></li>
                         <li><a href="{{ route('site.contact') }}">تواصل معنا</a></li>
                     </ul>
                 </div>

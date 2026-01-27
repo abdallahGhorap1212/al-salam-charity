@@ -61,6 +61,23 @@ class CaseService
         return $pdf->download('cases.pdf');
     }
 
+    public function printAllCards()
+    {
+        $cases = $this->caseRepository->allWithRelations();
+        
+        // إنشاء صور الباركود لكل الحالات وإضافتها إلى array
+        $casesData = [];
+        foreach ($cases as $case) {
+            $barcodeUrl = $this->createBarcodeImage($case);
+            $casesData[] = [
+                'case' => $case,
+                'barcodeUrl' => $barcodeUrl
+            ];
+        }
+
+        return $casesData;
+    }
+
     public function import(Request $request): void
     {
         Excel::import(new CasesImport(), $request->file('file'));

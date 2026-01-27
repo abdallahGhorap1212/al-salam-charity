@@ -6,6 +6,7 @@ use App\Http\Requests\Site\ContactStoreRequest;
 use App\Http\Requests\Site\DonationStoreRequest;
 use App\Models\News;
 use App\Models\Service;
+use App\Models\TermsAndConditions;
 use App\Services\AboutService;
 use App\Services\BoardMemberService;
 use App\Services\ContactMessageService;
@@ -44,6 +45,19 @@ class SiteController extends Controller
         $boardMembers = $this->boardMemberService->active();
 
         return view('site.about', compact('about', 'boardMembers'));
+    }
+
+    public function termsAndConditions(): View
+    {
+        $termsAndConditions = TermsAndConditions::firstOrCreate([
+            'id' => 1,
+        ], [
+            'title' => 'الشروط والأحكام',
+            'content' => 'يرجى إضافة محتوى الشروط والأحكام هنا',
+            'is_active' => true,
+        ]);
+
+        return view('site.terms-and-conditions', compact('termsAndConditions'));
     }
 
     public function services(): View

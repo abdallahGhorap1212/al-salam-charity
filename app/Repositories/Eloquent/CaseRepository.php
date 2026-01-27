@@ -33,4 +33,9 @@ class CaseRepository extends BaseRepository
     {
         return $this->query()->with(['area', 'caseType'])->latest()->get();
     }
+
+    public function allWithRelations()
+    {
+        return $this->query()->with(['area', 'caseType'])->get();
+    }
 }

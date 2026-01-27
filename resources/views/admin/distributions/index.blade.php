@@ -26,6 +26,8 @@
                 <thead class="table-light">
                     <tr>
                         <th>الحالة</th>
+                        <th>نوع المصروف</th>
+                        <th>المبلغ</th>
                         <th>المستخدم</th>
                         <th>تاريخ الصرف</th>
                         <th>ملاحظات</th>
@@ -34,14 +36,46 @@
                 <tbody>
                     @forelse ($distributions as $distribution)
                         <tr>
-                            <td>{{ $distribution->case?->name }}</td>
+                            <td>
+                                <a href="{{ route('admin.cases.show', $distribution->case) }}" class="text-decoration-none">
+                                    <strong>{{ $distribution->case?->name }}</strong>
+                                </a>
+                                <br>
+                                <small class="text-muted">{{ $distribution->case?->case_number }}</small>
+                            </td>
+                            <td>
+                                @if ($distribution->type)
+                                    <span class="badge bg-{{ $distribution->type->color }}">
+                                        {{ $distribution->type->ar_name }}
+                                    </span>
+                                @else
+                                    <span class="text-muted">-</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($distribution->amount)
+                                    <strong class="text-success">{{ number_format($distribution->amount, 2) }} {{ $distribution->currency }}</strong>
+                                @else
+                                    <span class="text-muted">-</span>
+                                @endif
+                            </td>
                             <td>{{ $distribution->user?->name }}</td>
-                            <td>{{ optional($distribution->distribution_date)->format('Y-m-d H:i') }}</td>
-                            <td>{{ $distribution->notes ?? '-' }}</td>
+                            <td>
+                                {{ optional($distribution->distribution_date)->format('Y-m-d H:i') }}
+                                <br>
+                                <small class="text-muted">{{ optional($distribution->distribution_date)->diffForHumans() }}</small>
+                            </td>
+                            <td>
+                                @if ($distribution->notes)
+                                    <span class="text-muted">{{ Str::limit($distribution->notes, 40) }}</span>
+                                @else
+                                    <span class="text-muted">-</span>
+                                @endif
+                            </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="text-center text-muted py-3">لا توجد عمليات صرف.</td>
+                            <td colspan="6" class="text-center text-muted py-3">لا توجد عمليات صرف.</td>
                         </tr>
                     @endforelse
                 </tbody>

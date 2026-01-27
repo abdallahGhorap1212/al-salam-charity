@@ -23,6 +23,7 @@ class CaseModel extends Model
         'address',
         'area_id',
         'case_type_id',
+        'user_id',
         'notes',
         'barcode',
         'is_active',
@@ -63,6 +64,14 @@ class CaseModel extends Model
     public function caseType(): BelongsTo
     {
         return $this->belongsTo(CaseType::class);
+    }
+
+    /**
+     * Get the user that owns the case.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**

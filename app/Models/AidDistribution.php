@@ -10,12 +10,16 @@ class AidDistribution extends Model
     protected $fillable = [
         'case_id',
         'user_id',
+        'distribution_type_id',
         'distribution_date',
+        'amount',
+        'currency',
         'notes',
     ];
 
     protected $casts = [
         'distribution_date' => 'datetime',
+        'amount' => 'decimal:2',
     ];
 
     /**
@@ -32,5 +36,13 @@ class AidDistribution extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the distribution type.
+     */
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(DistributionType::class, 'distribution_type_id');
     }
 }

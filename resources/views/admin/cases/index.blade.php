@@ -15,6 +15,7 @@
             <a href="{{ route('admin.cases.create') }}" class="btn btn-primary">إضافة حالة</a>
             <a href="{{ route('admin.cases.export') }}" class="btn btn-outline-success">تصدير Excel</a>
             <a href="{{ route('admin.cases.export-pdf') }}" class="btn btn-outline-dark">تصدير PDF</a>
+            <a href="{{ route('admin.cases.print-all') }}" class="btn btn-outline-info">طباعة جميع البطاقات</a>
             <button class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#importBox" aria-expanded="false">
                 استيراد Excel
             </button>
@@ -66,6 +67,9 @@
                                 @endif
                             </td>
                             <td class="text-end">
+                                <a href="{{ route('admin.cases.show', $case) }}" class="btn btn-sm btn-outline-info">
+                                    <i class="bi bi-eye"></i> الملف
+                                </a>
                                 <a href="{{ route('admin.cases.edit', $case) }}" class="btn btn-sm btn-outline-primary">تعديل</a>
                                 <a href="{{ route('admin.cases.card', $case) }}" class="btn btn-sm btn-outline-dark" target="_blank">طباعة كارت</a>
                                 <form action="{{ route('admin.cases.destroy', $case) }}" method="POST" class="d-inline"

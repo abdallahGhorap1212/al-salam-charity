@@ -88,6 +88,16 @@ class RolePermissionSeeder extends Seeder
             'view-donation-requests',
             'edit-donation-requests',
             'delete-donation-requests',
+
+            // Reports
+            'view-reports',
+
+            // Terms and Conditions
+            'view-terms-and-conditions',
+            'edit-terms-and-conditions',
+
+            // Distribution Types
+            'manage-distribution-types',
         ];
 
         foreach ($permissions as $permission) {
@@ -146,6 +156,13 @@ class RolePermissionSeeder extends Seeder
             'view-donation-requests',
             'edit-donation-requests',
             'delete-donation-requests',
+
+            'view-reports',
+
+            'view-terms-and-conditions',
+            'edit-terms-and-conditions',
+
+            'manage-distribution-types',
         ]);
 
         // منح صلاحيات محددة للـ Data Entry
@@ -177,6 +194,8 @@ class RolePermissionSeeder extends Seeder
 
             'view-contact-messages',
             'view-donation-requests',
+
+            'view-reports',
         ]);
 
         $viewerRole->givePermissionTo([
@@ -190,6 +209,7 @@ class RolePermissionSeeder extends Seeder
             'view-board-members',
             'view-contact-messages',
             'view-donation-requests',
+            'view-reports',
         ]);
 
         $admin = User::firstOrCreate(

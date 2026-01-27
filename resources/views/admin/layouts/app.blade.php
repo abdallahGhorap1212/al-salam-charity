@@ -9,6 +9,7 @@
 
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Cairo:300,400,600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -50,74 +51,127 @@
         <div class="row">
             <aside class="col-lg-2 col-md-3 admin-sidebar p-0">
                 <div class="admin-menu">
+                    <!-- الرئيسية -->
                     <a href="{{ route('admin.dashboard') }}" class="admin-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                        <i class="bi bi-speedometer2 me-2"></i>
                         لوحة التحكم
                     </a>
-                    @can('view-areas')
-                        <a href="{{ route('admin.areas.index') }}" class="admin-link {{ request()->routeIs('admin.areas.*') ? 'active' : '' }}">
-                            المناطق
-                        </a>
-                    @endcan
-                    @can('view-case-types')
-                        <a href="{{ route('admin.case-types.index') }}" class="admin-link {{ request()->routeIs('admin.case-types.*') ? 'active' : '' }}">
-                            أنواع الحالات
-                        </a>
-                    @endcan
-                    @can('view-users')
-                        <a href="{{ route('admin.users.index') }}" class="admin-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
-                            المستخدمين
-                        </a>
-                    @endcan
-                    @can('view-roles')
-                        <a href="{{ route('admin.roles.index') }}" class="admin-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
-                            الأدوار
-                        </a>
-                    @endcan
-                    @can('view-roles')
-                        <a href="{{ route('admin.permissions.index') }}" class="admin-link {{ request()->routeIs('admin.permissions.*') ? 'active' : '' }}">
-                            الصلاحيات
-                        </a>
-                    @endcan
-                    @can('view-cases')
-                        <a href="{{ route('admin.cases.index') }}" class="admin-link {{ request()->routeIs('admin.cases.*') ? 'active' : '' }}">
-                            الحالات والملفات
-                        </a>
-                    @endcan
-                    @can('view-distributions')
-                        <a href="{{ route('admin.distributions.index') }}" class="admin-link {{ request()->routeIs('admin.distributions.*') ? 'active' : '' }}">
-                            الصرف والباركود
-                        </a>
-                    @endcan
-                    @can('view-news')
-                        <a href="{{ route('admin.news.index') }}" class="admin-link {{ request()->routeIs('admin.news.*') ? 'active' : '' }}">
-                            الأخبار
-                        </a>
-                    @endcan
-                    @can('view-services')
-                        <a href="{{ route('admin.services.index') }}" class="admin-link {{ request()->routeIs('admin.services.*') ? 'active' : '' }}">
-                            الخدمات
-                        </a>
-                    @endcan
-                    @can('view-about')
-                        <a href="{{ route('admin.about.edit') }}" class="admin-link {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
-                            نبذة عن الجمعية
-                        </a>
-                    @endcan
-                    @can('view-board-members')
-                        <a href="{{ route('admin.board-members.index') }}" class="admin-link {{ request()->routeIs('admin.board-members.*') ? 'active' : '' }}">
-                            مجلس الإدارة
-                        </a>
-                    @endcan
-                    @can('view-contact-messages')
-                        <a href="{{ route('admin.contact-messages.index') }}" class="admin-link {{ request()->routeIs('admin.contact-messages.*') ? 'active' : '' }}">
-                            رسائل التواصل
-                        </a>
-                    @endcan
-                    @can('view-donation-requests')
-                        <a href="{{ route('admin.donation-requests.index') }}" class="admin-link {{ request()->routeIs('admin.donation-requests.*') ? 'active' : '' }}">
-                            طلبات التبرع
-                        </a>
-                    @endcan
+
+                    <!-- إدارة الحالات والمستحقين -->
+                    <div class="menu-section">
+                        <h6 class="menu-section-title">إدارة الحالات</h6>
+                        @can('view-case-types')
+                            <a href="{{ route('admin.case-types.index') }}" class="admin-link {{ request()->routeIs('admin.case-types.*') ? 'active' : '' }}">
+                                <i class="bi bi-tags me-2"></i>
+                                أنواع الحالات
+                            </a>
+                        @endcan
+                        @can('view-areas')
+                            <a href="{{ route('admin.areas.index') }}" class="admin-link {{ request()->routeIs('admin.areas.*') ? 'active' : '' }}">
+                                <i class="bi bi-geo-alt me-2"></i>
+                                المناطق
+                            </a>
+                        @endcan
+                        @can('view-cases')
+                            <a href="{{ route('admin.cases.index') }}" class="admin-link {{ request()->routeIs('admin.cases.*') ? 'active' : '' }}">
+                                <i class="bi bi-folder-check me-2"></i>
+                                الحالات والملفات
+                            </a>
+                        @endcan
+                        @can('view-distributions')
+                            <a href="{{ route('admin.distributions.index') }}" class="admin-link {{ request()->routeIs('admin.distributions.*') ? 'active' : '' }}">
+                                <i class="bi bi-box-seam me-2"></i>
+                                الصرف والباركود
+                            </a>
+                        @endcan
+                        @can('manage-distribution-types')
+                            <a href="{{ route('admin.distribution-types.index') }}" class="admin-link {{ request()->routeIs('admin.distribution-types.*') ? 'active' : '' }}">
+                                <i class="bi bi-tags me-2"></i>
+                                أنواع المصروفات
+                            </a>
+                        @endcan
+                        @can('view-reports')
+                            <a href="{{ route('admin.reports') }}" class="admin-link {{ request()->routeIs('admin.reports') ? 'active' : '' }}">
+                                <i class="bi bi-graph-up me-2"></i>
+                                التقارير والإحصائيات
+                            </a>
+                        @endcan
+                    </div>
+
+                    <!-- إدارة المحتوى -->
+                    <div class="menu-section">
+                        <h6 class="menu-section-title">إدارة المحتوى</h6>
+                        @can('view-news')
+                            <a href="{{ route('admin.news.index') }}" class="admin-link {{ request()->routeIs('admin.news.*') ? 'active' : '' }}">
+                                <i class="bi bi-newspaper me-2"></i>
+                                الأخبار
+                            </a>
+                        @endcan
+                        @can('view-services')
+                            <a href="{{ route('admin.services.index') }}" class="admin-link {{ request()->routeIs('admin.services.*') ? 'active' : '' }}">
+                                <i class="bi bi-briefcase me-2"></i>
+                                الخدمات
+                            </a>
+                        @endcan
+                        @can('view-about')
+                            <a href="{{ route('admin.about.edit') }}" class="admin-link {{ request()->routeIs('admin.about.*') ? 'active' : '' }}">
+                                <i class="bi bi-info-circle me-2"></i>
+                                نبذة عن الجمعية
+                            </a>
+                        @endcan
+                        @can('view-terms-and-conditions')
+                            <a href="{{ route('admin.terms-and-conditions.edit') }}" class="admin-link {{ request()->routeIs('admin.terms-and-conditions.*') ? 'active' : '' }}">
+                                <i class="bi bi-file-earmark-text me-2"></i>
+                                الشروط والأحكام
+                            </a>
+                        @endcan
+                        @can('view-board-members')
+                            <a href="{{ route('admin.board-members.index') }}" class="admin-link {{ request()->routeIs('admin.board-members.*') ? 'active' : '' }}">
+                                <i class="bi bi-people me-2"></i>
+                                مجلس الإدارة
+                            </a>
+                        @endcan
+                    </div>
+
+                    <!-- إدارة التفاعلات -->
+                    <div class="menu-section">
+                        <h6 class="menu-section-title">التفاعلات</h6>
+                        @can('view-contact-messages')
+                            <a href="{{ route('admin.contact-messages.index') }}" class="admin-link {{ request()->routeIs('admin.contact-messages.*') ? 'active' : '' }}">
+                                <i class="bi bi-chat-dots me-2"></i>
+                                رسائل التواصل
+                            </a>
+                        @endcan
+                        @can('view-donation-requests')
+                            <a href="{{ route('admin.donation-requests.index') }}" class="admin-link {{ request()->routeIs('admin.donation-requests.*') ? 'active' : '' }}">
+                                <i class="bi bi-gift me-2"></i>
+                                طلبات التبرع
+                            </a>
+                        @endcan
+                    </div>
+
+                    <!-- إدارة النظام -->
+                    <div class="menu-section">
+                        <h6 class="menu-section-title">إدارة النظام</h6>
+                        @can('view-users')
+                            <a href="{{ route('admin.users.index') }}" class="admin-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+                                <i class="bi bi-person-gear me-2"></i>
+                                المستخدمين
+                            </a>
+                        @endcan
+                        @can('view-roles')
+                            <a href="{{ route('admin.roles.index') }}" class="admin-link {{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
+                                <i class="bi bi-shield-check me-2"></i>
+                                الأدوار
+                            </a>
+                        @endcan
+                        @can('view-roles')
+                            <a href="{{ route('admin.permissions.index') }}" class="admin-link {{ request()->routeIs('admin.permissions.*') ? 'active' : '' }}">
+                                <i class="bi bi-lock me-2"></i>
+                                الصلاحيات
+                            </a>
+                        @endcan
+                    </div>
                 </div>
             </aside>
             <main class="col-lg-10 col-md-9 p-4 admin-content">
