@@ -98,6 +98,8 @@ class RolePermissionSeeder extends Seeder
 
             // Distribution Types
             'manage-distribution-types',
+            // Settings
+            'view-settings',
         ];
 
         foreach ($permissions as $permission) {
@@ -115,6 +117,7 @@ class RolePermissionSeeder extends Seeder
 
         // منح صلاحيات محددة للـ Manager
         $managerRole->givePermissionTo([
+            'view-settings',
             'view-users',
             'view-areas',
             'create-areas',

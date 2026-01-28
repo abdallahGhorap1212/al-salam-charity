@@ -11,8 +11,11 @@ class TermsAndConditionsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-            $this->middleware('permission:view-terms-and-conditions')->only(['edit']);
-            $this->middleware('permission:edit-terms-and-conditions')->only(['update']);
+        $this->middleware('permission:view-terms-and-conditions')->only(['edit']);
+        $this->middleware('permission:edit-terms-and-conditions')->only(['update']);
+    }
+
+    public function edit()
     {
         $termsAndConditions = TermsAndConditions::firstOrCreate([
             'id' => 1,

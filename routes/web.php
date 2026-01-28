@@ -71,4 +71,14 @@ Route::middleware('auth')
         Route::put('terms-and-conditions', [TermsAndConditionsController::class, 'update'])->name('terms-and-conditions.update');
         Route::resource('contact-messages', ContactMessageController::class)->only(['index', 'show', 'destroy']);
         Route::resource('donation-requests', DonationRequestController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
+            // إعدادات الموقع
+            Route::get('settings', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('settings.index');
+            Route::get('settings/colors', [\App\Http\Controllers\Admin\SettingsController::class, 'colors'])->name('settings.colors');
+            Route::post('settings/colors', [\App\Http\Controllers\Admin\SettingsController::class, 'updateColors'])->name('settings.colors.update');
+            Route::get('settings/social', [\App\Http\Controllers\Admin\SettingsController::class, 'social'])->name('settings.social');
+            Route::post('settings/social', [\App\Http\Controllers\Admin\SettingsController::class, 'updateSocial'])->name('settings.social.update');
+            Route::get('settings/organization', [\App\Http\Controllers\Admin\SettingsController::class, 'organization'])->name('settings.organization');
+            Route::post('settings/organization', [\App\Http\Controllers\Admin\SettingsController::class, 'updateOrganization'])->name('settings.organization.update');
+            Route::get('settings/content', [\App\Http\Controllers\Admin\SettingsController::class, 'content'])->name('settings.content');
+            Route::post('settings/content', [\App\Http\Controllers\Admin\SettingsController::class, 'updateContent'])->name('settings.content.update');
     });

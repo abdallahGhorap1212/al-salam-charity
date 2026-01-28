@@ -1,39 +1,138 @@
-@extends('site.layouts.app')
+@extends('site.layouts.app', [
+    'title' => $about->title ? $about->title . ' - جمعية السلام' : 'عن الجمعية - جمعية السلام',
+    'description' => $about->summary ?? 'تعرف على جمعية السلام ورسالتها وأهدافها في خدمة المجتمع.'
+])
 
 @section('content')
     <section class="page-hero">
         <div class="container">
-            <h1>نبذة عن الجمعية</h1>
+            <h1>{{ $about->title ?? 'عن الجمعية' }}</h1>
             <p>{{ $about->summary ?? 'جمعية السلام مؤسسة خيرية تهدف إلى تمكين الأسر ومساندة المجتمع بخدمات متنوعة.' }}</p>
         </div>
     </section>
 
+    <!-- Mission and Vision Section -->
     <section class="section-block">
         <div class="container">
-            <div class="about-grid">
-                <div>
-                    <h2>{{ $about->title ?? 'جمعية السلام' }}</h2>
-                    <p>{{ $about->body ?? 'نعمل على إطلاق مبادرات تنموية مستدامة، ونقدّم الدعم للأسر الأكثر احتياجًا.' }}</p>
-                </div>
-                <div class="about-cards">
-                    <div class="about-card">
-                        <span>رسالتنا</span>
-                        <strong>{{ $about->mission ?? 'خدمة المجتمع وتعزيز قيم التكافل.' }}</strong>
+            <div class="mission-vision-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <div class="mission-card" style="animation: slideInUp 0.6s ease-out;">
+                    <div class="card-icon mission-icon">
+                        <i class="bi bi-target"></i>
                     </div>
-                    <div class="about-card">
-                        <span>رؤيتنا</span>
-                        <strong>{{ $about->vision ?? 'مجتمع متكافل يحيا بكرامة.' }}</strong>
+                    <h3>رسالتنا</h3>
+                    <p>{{ $about->mission ?? 'خدمة المجتمع وتعزيز قيم التكافل الاجتماعي.' }}</p>
+                </div>
+                <div class="vision-card" style="animation: slideInUp 0.6s ease-out 0.1s backwards;">
+                    <div class="card-icon vision-icon">
+                        <i class="bi bi-eye"></i>
+                    </div>
+                    <h3>رؤيتنا</h3>
+                    <p>{{ $about->vision ?? 'مجتمع متكافل يحيا بكرامة وسلام.' }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Content Section -->
+    <section class="section-block section-light">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2>{{ $about->title ?? 'جمعية السلام' }}</h2>
+                    <p class="lead">{{ $about->body ?? 'نعمل على إطلاق مبادرات تنموية مستدامة، ونقدّم الدعم للأسر الأكثر احتياجًا.' }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="section-block">
+        <div class="container">
+            <div class="section-head">
+                <h2><i class="bi bi-award"></i> قيمنا الأساسية</h2>
+                <p>المبادئ التي توجه كل عملنا وتحركنا نحو الهدف.</p>
+            </div>
+            <div class="values-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <div class="value-card" style="animation: fadeInUp 0.6s ease-out;">
+                    <div class="value-icon social-justice">
+                        <i class="bi bi-scales"></i>
+                    </div>
+                    <h4>العدالة الاجتماعية</h4>
+                    <p>معاملة جميع الأسر بمساواة واحترام دون تمييز</p>
+                </div>
+                <div class="value-card" style="animation: fadeInUp 0.6s ease-out 0.1s backwards;">
+                    <div class="value-icon sustainability">
+                        <i class="bi bi-plant"></i>
+                    </div>
+                    <h4>الاستدامة</h4>
+                    <p>برامج طويلة الأجل تحدث تأثيرًا حقيقيًا ودائمًا</p>
+                </div>
+                <div class="value-card" style="animation: fadeInUp 0.6s ease-out 0.2s backwards;">
+                    <div class="value-icon transparency">
+                        <i class="bi bi-eye-fill"></i>
+                    </div>
+                    <h4>الشفافية</h4>
+                    <p>الوضوح التام في أداء المشاريع والميزانيات</p>
+                </div>
+                <div class="value-card" style="animation: fadeInUp 0.6s ease-out 0.3s backwards;">
+                    <div class="value-icon efficiency">
+                        <i class="bi bi-speedometer"></i>
+                    </div>
+                    <h4>الكفاءة</h4>
+                    <p>استخدام أمثل للموارد والإمكانيات المتاحة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="section-block section-accent">
+        <div class="container">
+            <div class="section-head">
+                <h2><i class="bi bi-bar-chart"></i> إحصائيات الأداء</h2>
+                <p>أرقام تعكس تأثيرنا المستمر في المجتمع.</p>
+            </div>
+            <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <div class="stat-box" style="animation: zoomIn 0.6s ease-out;">
+                    <div class="stat-icon families">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 style="animation: countUp 0.6s ease-out;">{{ $totalCases ?? 0 }}</h3>
+                        <p>عائلة استفادت</p>
+                        <small>من خدماتنا وبرامجنا</small>
+                    </div>
+                </div>
+                <div class="stat-box" style="animation: zoomIn 0.6s ease-out 0.1s backwards;">
+                    <div class="stat-icon projects">
+                        <i class="bi bi-boxes"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 style="animation: countUp 0.6s ease-out 0.1s backwards;">{{ $totalDistributions ?? 0 }}</h3>
+                        <p>مشروع منفذ</p>
+                        <small>بنجاح وفعالية</small>
+                    </div>
+                </div>
+                <div class="stat-box" style="animation: zoomIn 0.6s ease-out 0.2s backwards;">
+                    <div class="stat-icon team">
+                        <i class="bi bi-person-heart"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 style="animation: countUp 0.6s ease-out 0.2s backwards;">{{ $totalMembers ?? 0 }}</h3>
+                        <p>متطوع وموظف</p>
+                        <small>يعملون بشغف وإخلاص</small>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-block section-accent">
+    <!-- Board Members Section -->
+    <section class="section-block">
         <div class="container">
             <div class="section-head">
-                <h2>مجلس الإدارة</h2>
-                <p>قيادات الجمعية وخبراتها.</p>
+                <h2><i class="bi bi-people"></i> مجلس الإدارة</h2>
+                <p>القيادات التي تقود مسيرة الجمعية برؤية استراتيجية وخبرة عملية.</p>
             </div>
             <div class="board-marquee" data-marquee>
                 <div class="board-marquee-inner" data-marquee-inner>
@@ -44,18 +143,21 @@
                                 @if ($member->photo_url)
                                     <img src="{{ $member->photo_url }}" alt="{{ $member->name }}">
                                 @else
-                                    <span>{{ mb_substr($member->name, 0, 1) }}</span>
+                                    <span class="initials">{{ mb_substr($member->name, 0, 1) }}</span>
                                 @endif
                             </div>
                             <h3>{{ $member->name }}</h3>
-                            <p>{{ $member->role ?? 'عضو مجلس الإدارة' }}</p>
+                            <p class="role">{{ $member->role ?? 'عضو مجلس الإدارة' }}</p>
                             @if ($member->bio)
-                                <small>{{ $member->bio }}</small>
-                        @endif
-                    </article>
-                @empty
-                    <div class="empty-state">سيتم إضافة أعضاء المجلس قريبًا.</div>
-                @endforelse
+                                <small class="bio">{{ $member->bio }}</small>
+                            @endif
+                        </article>
+                    @empty
+                        <div class="empty-state">
+                            <i class="bi bi-inbox"></i>
+                            <p>سيتم إضافة أعضاء المجلس قريبًا.</p>
+                        </div>
+                    @endforelse
                     </div>
                 </div>
             </div>

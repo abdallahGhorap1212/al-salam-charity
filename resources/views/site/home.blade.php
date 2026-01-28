@@ -1,42 +1,49 @@
-@extends('site.layouts.app')
+@extends('site.layouts.app', [
+    'title' => 'جمعية السلام - مؤسسة خيرية تخدم المجتمع',
+    'description' => 'جمعية السلام مؤسسة خيرية متخصصة في تقديم خدمات صحية واجتماعية وتعليمية للأسر المستحقة.'
+])
 
 @section('content')
     <section class="hero-section">
         <div class="container">
             <div class="hero-grid">
-                <div class="hero-copy">
-                    <span class="hero-label">جمعية السلام</span>
-                    <h1>إيد واحدة تغيّر حياة كاملة</h1>
-                    <p>
+                <div class="hero-copy" style="animation: slideInUp 0.8s ease-out;">
+                    <span class="hero-label" aria-label="اسم المؤسسة">🌟 جمعية السلام</span>
+                    <h1 style="animation: slideInUp 0.8s ease-out 0.1s backwards;">إيد واحدة تغيّر حياة كاملة</h1>
+                    <p class="hero-description" style="animation: slideInUp 0.8s ease-out 0.2s backwards;">
                         {{ $about->summary ?? 'نصنع مبادرات تنموية مستدامة ونساند الأسر الأكثر احتياجًا عبر خدمات صحية واجتماعية وتعليمية.' }}
                     </p>
-                    <div class="hero-actions">
-                        <a href="{{ route('site.donations') }}" class="site-cta">ساهم معنا</a>
-                        <a href="{{ route('site.services') }}" class="site-secondary">تعرّف على الخدمات</a>
+                    <div class="hero-actions" style="animation: slideInUp 0.8s ease-out 0.3s backwards;">
+                        <a href="{{ route('site.donations') }}" class="site-cta site-cta--large" role="button" aria-label="ساهم في دعم مشاريعنا" style="transition: all 0.3s ease;">
+                            <i class="bi bi-hand-thumbs-up"></i> ساهم معنا
+                        </a>
+                        <a href="{{ route('site.services') }}" class="site-secondary" role="button" aria-label="تعرف على خدماتنا" style="transition: all 0.3s ease;">
+                            <i class="bi bi-arrow-right"></i> تعرّف على الخدمات
+                        </a>
                     </div>
-                    <div class="hero-stats">
-                        <div>
-                            <strong>{{ $services->count() }}</strong>
-                            <span>خدمة نشطة</span>
+                    <div class="hero-stats" style="animation: slideInUp 0.8s ease-out 0.4s backwards;">
+                        <div class="stat-item" style="animation: zoomIn 0.6s ease-out 0.5s backwards;">
+                            <strong class="stat-number">{{ $services->count() }}</strong>
+                            <span class="stat-label">خدمة نشطة</span>
                         </div>
-                        <div>
-                            <strong>{{ $news->count() }}</strong>
-                            <span>خبر حديث</span>
+                        <div class="stat-item" style="animation: zoomIn 0.6s ease-out 0.6s backwards;">
+                            <strong class="stat-number">{{ $news->count() }}</strong>
+                            <span class="stat-label">خبر حديث</span>
                         </div>
-                        <div>
-                            <strong>{{ $boardMembers->count() }}</strong>
-                            <span>عضو مجلس إدارة</span>
+                        <div class="stat-item" style="animation: zoomIn 0.6s ease-out 0.7s backwards;">
+                            <strong class="stat-number">{{ $boardMembers->count() }}</strong>
+                            <span class="stat-label">عضو قيادة</span>
                         </div>
                     </div>
                 </div>
-                <div class="hero-card">
+                <div class="hero-card" style="animation: slideInRight 0.8s ease-out;">
                     <div class="hero-card-inner">
-                        <img src="{{ asset('images/logo-transparent.png') }}" alt="جمعية السلام">
-                        <h3>{{ $about->title ?? 'جمعية السلام' }}</h3>
-                        <p>{{ $about->subtitle ?? 'نخدم المجتمع بروح العطاء' }}</p>
-                        <div class="hero-highlight">
-                            <span>رسالتنا</span>
-                            <strong>{{ $about->mission ?? 'كرامة الإنسان أولاً، وخدمة المجتمع مسؤولية مشتركة.' }}</strong>
+                        <img src="{{ asset('images/logo-transparent.png') }}" alt="شعار جمعية السلام" class="hero-logo" style="animation: float 3s ease-in-out infinite;">
+                        <h3 style="animation: slideInUp 0.8s ease-out 0.2s backwards;">{{ $about->title ?? 'جمعية السلام' }}</h3>
+                        <p class="hero-subtitle" style="animation: slideInUp 0.8s ease-out 0.3s backwards;">{{ $about->subtitle ?? 'نخدم المجتمع بروح العطاء والكرامة' }}</p>
+                        <div class="hero-highlight" style="animation: slideInUp 0.8s ease-out 0.4s backwards;">
+                            <span class="highlight-label"><i class="bi bi-star-fill"></i> رسالتنا</span>
+                            <strong class="highlight-text">{{ $about->mission ?? 'كرامة الإنسان أولاً، وخدمة المجتمع مسؤولية مشتركة.' }}</strong>
                         </div>
                     </div>
                 </div>
@@ -47,101 +54,124 @@
     <section class="section-block">
         <div class="container">
             <div class="section-head">
-                <h2>خدماتنا</h2>
+                <h2><i class="bi bi-heart-handshake"></i> خدماتنا</h2>
                 <p>مجالات عملنا الأساسية لخدمة أهلنا في المجتمع.</p>
-                <a class="site-link" href="{{ route('site.services') }}">مشاهدة كل الخدمات</a>
+                <a class="site-link site-link--view-all" href="{{ route('site.services') }}" title="عرض جميع الخدمات">
+                    مشاهدة كل الخدمات <i class="bi bi-arrow-left"></i>
+                </a>
             </div>
-            <div class="service-grid">
-                @forelse ($services as $service)
-                    <article class="service-card">
-                        <div class="service-icon">
-                            @if ($service->icon_url)
-                                <img src="{{ $service->icon_url }}" alt="{{ $service->title }}">
-                            @else
-                                <span>⭐</span>
-                            @endif
-                        </div>
-                        <h3>{{ $service->title }}</h3>
-                        <p>{{ $service->summary ?? 'خدمة مجتمعية داعمة للأسر المستحقة.' }}</p>
-                        <a href="{{ route('site.services.show', $service) }}" class="site-link">تفاصيل الخدمة</a>
-                    </article>
-                @empty
-                    <div class="empty-state">سيتم إضافة الخدمات قريبًا.</div>
-                @endforelse
-            </div>
+            @if($services->count() > 0)
+                <div class="service-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                    @foreach ($services->take(6) as $index => $service)
+                        <article class="service-card" style="animation: slideInUp 0.6s ease-out {{ $index * 0.1 }}s backwards;">
+                            <div class="service-icon">
+                                @if ($service->icon_url)
+                                    <img src="{{ $service->icon_url }}" alt="{{ $service->title }}" loading="lazy">
+                                @else
+                                    <span class="service-placeholder">💼</span>
+                                @endif
+                            </div>
+                            <h3>{{ $service->title }}</h3>
+                            <p>{{ $service->summary ?? 'خدمة مجتمعية داعمة للأسر المستحقة.' }}</p>
+                            <a href="{{ route('site.services.show', $service) }}" class="site-link" title="تفاصيل {{ $service->title }}">تفاصيل الخدمة</a>
+                        </article>
+                    @endforeach
+                </div>
+            @else
+                <div class="empty-state">
+                    <i class="bi bi-inbox"></i>
+                    <p>سيتم إضافة الخدمات قريبًا.</p>
+                </div>
+            @endif
         </div>
     </section>
 
     <section class="section-block section-accent">
         <div class="container">
             <div class="section-head">
-                <h2>آخر الأخبار</h2>
+                <h2><i class="bi bi-newspaper"></i> آخر الأخبار</h2>
                 <p>تابع أهم المستجدات والمبادرات التي تنفذها الجمعية.</p>
-                <a class="site-link" href="{{ route('site.news') }}">مزيد من الأخبار</a>
+                <a class="site-link site-link--view-all" href="{{ route('site.news') }}" title="عرض جميع الأخبار">
+                    مزيد من الأخبار <i class="bi bi-arrow-left"></i>
+                </a>
             </div>
-            <div class="news-grid">
-                @forelse ($news as $item)
-                    <article class="news-card">
-                        <div class="news-card-media">
-                            @if ($item->cover_image_url)
-                                <img src="{{ $item->cover_image_url }}" alt="{{ $item->title }}">
-                            @endif
-                        </div>
-                        <div class="news-card-body">
-                            <span class="news-date">{{ optional($item->published_at)->format('Y-m-d') ?? $item->created_at->format('Y-m-d') }}</span>
-                            <h3>{{ $item->title }}</h3>
-                            <p>{{ $item->excerpt ?? \Illuminate\Support\Str::limit(strip_tags($item->body), 120) }}</p>
-                            <a href="{{ route('site.news.show', $item) }}" class="site-link">اقرأ الخبر</a>
-                        </div>
-                    </article>
-                @empty
-                    <div class="empty-state">لا توجد أخبار حالياً.</div>
-                @endforelse
-            </div>
+            @if($news->count() > 0)
+                <div class="news-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    @foreach ($news->take(3) as $index => $item)
+                        <article class="news-card" style="animation: fadeInUp 0.6s ease-out {{ $index * 0.1 }}s backwards;">
+                            <div class="news-card-media">
+                                @if ($item->cover_image_url)
+                                    <img src="{{ $item->cover_image_url }}" alt="{{ $item->title }}" loading="lazy" title="{{ $item->title }}">
+                                @else
+                                    <div class="news-placeholder">
+                                        <i class="bi bi-newspaper"></i>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="news-card-body">
+                                <span class="news-date">
+                                    <i class="bi bi-calendar-event"></i>
+                                    {{ optional($item->published_at)?->format('d/m/Y') ?? $item->created_at->format('d/m/Y') }}
+                                </span>
+                                <h3>{{ $item->title }}</h3>
+                                <p>{{ $item->excerpt ?? \Illuminate\Support\Str::limit(strip_tags($item->body), 120) }}</p>
+                                <a href="{{ route('site.news.show', $item) }}" class="site-link" title="اقرأ: {{ $item->title }}">اقرأ الخبر</a>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            @else
+                <div class="empty-state">
+                    <i class="bi bi-inbox"></i>
+                    <p>لا توجد أخبار حالياً.</p>
+                </div>
+            @endif
         </div>
     </section>
 
-    <section class="section-block">
-        <div class="container">
-            <div class="section-head">
-                <h2>مجلس الإدارة</h2>
-                <p>قيادات تعمل بخبرة وشغف لخدمة المجتمع.</p>
-            </div>
-            <div class="board-marquee" data-marquee>
-                <div class="board-marquee-inner" data-marquee-inner>
-                    <div class="board-track" data-marquee-track>
-                    @forelse ($boardMembers as $member)
-                        <article class="board-card">
-                            <div class="board-avatar">
-                                @if ($member->photo_url)
-                                    <img src="{{ $member->photo_url }}" alt="{{ $member->name }}">
-                                @else
-                                    <span>{{ mb_substr($member->name, 0, 1) }}</span>
+    @if($boardMembers->count() > 0)
+        <section class="section-block">
+            <div class="container">
+                <div class="section-head">
+                    <h2><i class="bi bi-people"></i> مجلس الإدارة</h2>
+                    <p>قيادات تعمل بخبرة وشغف لخدمة المجتمع.</p>
+                </div>
+                <div class="board-marquee" data-marquee>
+                    <div class="board-marquee-inner" data-marquee-inner>
+                        <div class="board-track" data-marquee-track>
+                        @foreach ($boardMembers as $member)
+                            <article class="board-card">
+                                <div class="board-avatar">
+                                    @if ($member->photo_url)
+                                        <img src="{{ $member->photo_url }}" alt="{{ $member->name }}" loading="lazy">
+                                    @else
+                                        <span class="initials">{{ mb_substr($member->name, 0, 1) }}</span>
+                                    @endif
+                                </div>
+                                <h3>{{ $member->name }}</h3>
+                                <p class="role">{{ $member->role ?? 'عضو مجلس الإدارة' }}</p>
+                                @if ($member->bio)
+                                    <small class="bio">{{ $member->bio }}</small>
                                 @endif
-                            </div>
-                            <h3>{{ $member->name }}</h3>
-                            <p>{{ $member->role ?? 'عضو مجلس الإدارة' }}</p>
-                            @if ($member->bio)
-                                <small>{{ $member->bio }}</small>
-                        @endif
-                    </article>
-                @empty
-                    <div class="empty-state">سيتم إضافة أعضاء المجلس قريبًا.</div>
-                @endforelse
+                            </article>
+                        @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
     <section class="cta-section">
         <div class="container">
             <div class="cta-card">
                 <div>
-                    <h2>ابدأ رحلة العطاء معنا</h2>
-                    <p>تبرعك يصنع أثرًا مباشرًا ويغير حياة المستحقين.</p>
+                    <h2><i class="bi bi-heart-fill"></i> ابدأ رحلة العطاء معنا</h2>
+                    <p>تبرعك يصنع أثرًا مباشرًا ويغير حياة المستحقين نحو الأفضل.</p>
                 </div>
-                <a class="site-cta" href="{{ route('site.donations') }}">اذهب للتبرع</a>
+                <a class="site-cta site-cta--large" href="{{ route('site.donations') }}" role="button" aria-label="اذهب لصفحة التبرعات">
+                    <i class="bi bi-hand-thumbs-up"></i> اذهب للتبرع
+                </a>
             </div>
         </div>
     </section>

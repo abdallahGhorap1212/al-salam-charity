@@ -1,56 +1,159 @@
-@extends('site.layouts.app')
+@extends('site.layouts.app', [
+    'title' => 'اتصل بنا - جمعية السلام',
+    'description' => 'نستقبل استفساراتك ومقترحاتك. تواصل معنا عبر النموذج أو معلومات الاتصال المباشرة.'
+])
 
 @section('content')
     <section class="page-hero">
         <div class="container">
-            <h1>تواصل معنا</h1>
-            <p>نستقبل استفساراتكم ومقترحاتكم على مدار الساعة.</p>
+            <h1><i class="bi bi-chat-left-dots"></i> تواصل معنا</h1>
+            <p>نستقبل استفساراتكم ومقترحاتكم بكل اهتمام. فريقنا جاهز للرد عليكم خلال ساعات العمل.</p>
         </div>
     </section>
 
     <section class="section-block">
         <div class="container">
-            <div class="content-card">
-                <div class="content-main">
-                    <form action="{{ route('site.contact.store') }}" method="POST" class="form-stack">
+            <div class="content-card" style="display: grid; grid-template-columns: 1fr 350px; gap: 3rem; align-items: start;">
+                <div class="content-main" style="animation: slideInLeft 0.6s ease-out;">
+                    <form action="{{ route('site.contact.store') }}" method="POST" class="form-stack" id="contactForm">
                         @csrf
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">الاسم</label>
-                                <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
+                        <fieldset>
+                            <legend><strong>بيانات التواصل</strong></legend>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3" style="animation: slideInUp 0.6s ease-out 0.1s backwards;">
+                                    <label class="form-label" for="senderName">
+                                        <i class="bi bi-person"></i> الاسم الكامل
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="senderName" 
+                                        name="name" 
+                                        class="form-control" 
+                                        value="{{ old('name') }}" 
+                                        required
+                                        aria-describedby="nameHelp">
+                                </div>
+                                <div class="col-md-6 mb-3" style="animation: slideInUp 0.6s ease-out 0.2s backwards;">
+                                    <label class="form-label" for="senderEmail">
+                                        <i class="bi bi-envelope"></i> البريد الإلكتروني
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input 
+                                        type="email" 
+                                        id="senderEmail" 
+                                        name="email" 
+                                        class="form-control" 
+                                        value="{{ old('email') }}"
+                                        required
+                                        aria-describedby="emailHelp">
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">البريد الإلكتروني</label>
-                                <input type="email" name="email" class="form-control" value="{{ old('email') }}">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3" style="animation: slideInUp 0.6s ease-out 0.3s backwards;">
+                                    <label class="form-label" for="senderPhone">
+                                        <i class="bi bi-telephone"></i> رقم الهاتف
+                                    </label>
+                                    <input 
+                                        type="tel" 
+                                        id="senderPhone" 
+                                        name="phone" 
+                                        class="form-control" 
+                                        value="{{ old('phone') }}"
+                                        placeholder="+966 50 0000000"
+                                        aria-describedby="phoneHelp">
+                                </div>
+                                <div class="col-md-6 mb-3" style="animation: slideInUp 0.6s ease-out 0.4s backwards;">
+                                    <label class="form-label" for="messageSubject">
+                                        <i class="bi bi-chat-square-quote"></i> موضوع الرسالة
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="messageSubject" 
+                                        name="subject" 
+                                        class="form-control" 
+                                        value="{{ old('subject') }}"
+                                        required
+                                        aria-describedby="subjectHelp">
+                                </div>
                             </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend><strong>محتوى الرسالة</strong></legend>
+
+                            <div class="mb-3">
+                                <label class="form-label" for="messageContent">
+                                    <i class="bi bi-pencil-square"></i> الرسالة
+                                    <span class="required">*</span>
+                                </label>
+                                <textarea 
+                                    id="messageContent" 
+                                    name="message" 
+                                    class="form-control" 
+                                    rows="6"
+                                    required
+                                    placeholder="اكتب رسالتك هنا..."
+                                    aria-describedby="messageHelp">{{ old('message') }}</textarea>
+                                <small id="messageHelp" class="form-text">يرجى التفصيل قدر الإمكان حتى نتمكن من مساعدتك بشكل أفضل</small>
+                            </div>
+                        </fieldset>
+
+                        <div class="form-actions">
+                            <button type="submit" class="site-cta site-cta--large">
+                                <i class="bi bi-send"></i> إرسال الرسالة
+                            </button>
+                            <button type="reset" class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-clockwise"></i> مسح البيانات
+                            </button>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">رقم الهاتف</label>
-                                <input type="text" name="phone" class="form-control" value="{{ old('phone') }}">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">عنوان الرسالة</label>
-                                <input type="text" name="subject" class="form-control" value="{{ old('subject') }}">
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">الرسالة</label>
-                            <textarea name="message" class="form-control" rows="5" required>{{ old('message') }}</textarea>
-                        </div>
-                        <button type="submit" class="site-cta">إرسال الرسالة</button>
                     </form>
                 </div>
-                <div class="content-side">
-                    <h4>بيانات التواصل</h4>
-                    <ul class="contact-list">
-                        <li>العنوان: {{ $about->address ?? 'سيتم تحديث العنوان قريبًا.' }}</li>
-                        <li>الهاتف: {{ $about->phone ?? 'سيتم إضافة رقم الهاتف قريبًا.' }}</li>
-                        <li>البريد: {{ $about->email ?? 'info@example.com' }}</li>
-                    </ul>
-                    <div class="contact-note">
-                        <p>نسعد بالتواصل معكم في أي وقت.</p>
+
+                <div class="content-side" style="animation: slideInRight 0.6s ease-out;">
+                    <div class="sidebar-card sidebar-card--primary" style="animation: zoomIn 0.6s ease-out 0.2s backwards;">
+                        <h4><i class="bi bi-telephone-outbound"></i> بيانات التواصل المباشرة</h4>
+                        <ul class="contact-info">
+                            <li style="animation: fadeInUp 0.6s ease-out 0.3s backwards; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="bi bi-telephone-fill"></i>
+                                <a href="tel:{{ str_replace([' ', '-'], '', $about->phone ?? '') }}" style="margin-right: 0.5rem;">
+                                    {{ $about->phone ?? 'سيتم إضافة الرقم قريبًا' }}
+                                </a>
+                            </li>
+                            <li style="animation: fadeInUp 0.6s ease-out 0.4s backwards; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="bi bi-envelope-fill"></i>
+                                <a href="mailto:{{ $about->email ?? 'info@example.com' }}" style="margin-right: 0.5rem;">
+                                    {{ $about->email ?? 'info@example.com' }}
+                                </a>
+                            </li>
+                            <li style="animation: fadeInUp 0.6s ease-out 0.5s backwards; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <span>{{ $about->address ?? 'سيتم إضافة العنوان قريبًا' }}</span>
+                            </li>
+                        </ul>
                     </div>
+
+                    <div class="sidebar-card sidebar-card--secondary">
+                        <h4><i class="bi bi-clock-history"></i> أوقات العمل</h4>
+                        <ul class="working-hours">
+                            <li>
+                                <strong>أيام الأسبوع:</strong><br>
+                                من 9:00 صباحًا إلى 5:00 مساءً
+                            </li>
+                            <li>
+                                <strong>يوم الجمعة والسبت:</strong><br>
+                                مغلق
+                            </li>
+                        </ul>
+                        <p class="contact-note">
+                            <i class="bi bi-info-circle"></i> 
+                            سنرد على رسالتك في أقرب وقت ممكن خلال ساعات العمل الرسمية.
+                        </p>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -171,6 +171,12 @@
                                 الصلاحيات
                             </a>
                         @endcan
+                        @can('view-settings')
+                            <a href="{{ route('admin.settings.index') }}" class="admin-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                                <i class="bi bi-sliders me-2"></i>
+                                الإعدادات
+                            </a>
+                        @endcan
                     </div>
                 </div>
             </aside>
