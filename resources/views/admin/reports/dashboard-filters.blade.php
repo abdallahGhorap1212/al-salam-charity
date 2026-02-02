@@ -20,7 +20,7 @@
         </div>
     </section>
 
-    <!-- نموذج الفلاتر -->
+    <!-- Filters form -->
     <div class="panel-card mb-4">
         <div class="panel-header">
             <div>
@@ -88,7 +88,7 @@
         </form>
     </div>
 
-    <!-- جدول الحالات -->
+    <!-- Cases table -->
     <div class="panel-card mb-4">
         <div class="panel-header">
             <div>
@@ -113,13 +113,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- سيتم ملء البيانات من JavaScript -->
+                    <!-- Data will be filled by JavaScript -->
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- إحصائيات الفلاتر -->
+    <!-- Filter statistics -->
     <div class="row g-3">
         <div class="col-md-6 col-lg-3">
             <div class="stat-card">

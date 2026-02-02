@@ -65,7 +65,7 @@ class CaseService
     {
         $cases = $this->caseRepository->allWithRelations();
         
-        // إنشاء صور الباركود لكل الحالات وإضافتها إلى array
+        // Generate barcode images for all cases and add them to the array
         $casesData = [];
         foreach ($cases as $case) {
             $barcodeUrl = $this->createBarcodeImage($case);

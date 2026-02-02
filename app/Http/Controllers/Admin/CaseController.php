@@ -36,7 +36,6 @@ class CaseController extends Controller
     {
         $search = $request->string('search')->toString();
         $cases = $this->caseService->search($search, 15);
-
         return view('admin.cases.index', compact('cases'));
     }
 
@@ -44,7 +43,6 @@ class CaseController extends Controller
     {
         $areas = $this->areaService->orderedAll();
         $caseTypes = $this->caseTypeService->orderedAll();
-
         return view('admin.cases.create', compact('areas', 'caseTypes'));
     }
 

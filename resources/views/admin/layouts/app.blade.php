@@ -51,13 +51,13 @@
         <div class="row">
             <aside class="col-lg-2 col-md-3 admin-sidebar p-0">
                 <div class="admin-menu">
-                    <!-- الرئيسية -->
+                    <!-- Home -->
                     <a href="{{ route('admin.dashboard') }}" class="admin-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                         <i class="bi bi-speedometer2 me-2"></i>
                         لوحة التحكم
                     </a>
 
-                    <!-- إدارة الحالات والمستحقين -->
+                    <!-- Cases and beneficiaries management -->
                     <div class="menu-section">
                         <h6 class="menu-section-title">إدارة الحالات</h6>
                         @can('view-case-types')
@@ -98,7 +98,7 @@
                         @endcan
                     </div>
 
-                    <!-- إدارة المحتوى -->
+                    <!-- Content management -->
                     <div class="menu-section">
                         <h6 class="menu-section-title">إدارة المحتوى</h6>
                         @can('view-news')
@@ -133,7 +133,7 @@
                         @endcan
                     </div>
 
-                    <!-- إدارة التفاعلات -->
+                    <!-- Interactions management -->
                     <div class="menu-section">
                         <h6 class="menu-section-title">التفاعلات</h6>
                         @can('view-contact-messages')
@@ -150,7 +150,7 @@
                         @endcan
                     </div>
 
-                    <!-- إدارة النظام -->
+                    <!-- System management -->
                     <div class="menu-section">
                         <h6 class="menu-section-title">إدارة النظام</h6>
                         @can('view-users')

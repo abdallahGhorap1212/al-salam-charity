@@ -14,9 +14,9 @@
     <section class="section-block">
         <div class="container">
             @if($services->count() > 0)
-                <div class="service-grid service-grid--page" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="service-grid service-grid--page">
                     @forelse ($services as $index => $service)
-                        <article class="service-card service-card--cover" style="animation: slideInUp 0.6s ease-out {{ $index * 0.1 }}s backwards;">
+                        <article class="service-card service-card--cover reveal-up" style="--delay: {{ $index * 0.1 }}s;">
                             <div class="service-cover">
                                 @if ($service->icon_url)
                                     <img src="{{ $service->icon_url }}" alt="{{ $service->title }}" loading="lazy">
@@ -62,29 +62,29 @@
                 <h2>لماذا نختار خدماتنا؟</h2>
                 <p>نقدم خدمات موثوقة وفعّالة بأعلى معايير الجودة والشفافية.</p>
             </div>
-            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                <div class="feature-card" style="animation: slideInUp 0.6s ease-out;">
+            <div class="features-grid">
+                <div class="feature-card reveal-up">
                     <div class="feature-icon">
                         <i class="bi bi-shield-check"></i>
                     </div>
                     <h4>معايير عالية</h4>
                     <p>جميع خدماتنا تتوافق مع أفضل المعايير العالمية والمحلية.</p>
                 </div>
-                <div class="feature-card" style="animation: slideInUp 0.6s ease-out 0.1s backwards;">
+                <div class="feature-card reveal-up delay-1">
                     <div class="feature-icon">
                         <i class="bi bi-people"></i>
                     </div>
                     <h4>فريق متخصص</h4>
                     <p>فريق من المتخصصين والمتطوعين المدربين على أعلى مستوى.</p>
                 </div>
-                <div class="feature-card" style="animation: slideInUp 0.6s ease-out 0.2s backwards;">
+                <div class="feature-card reveal-up delay-2">
                     <div class="feature-icon">
                         <i class="bi bi-bar-chart"></i>
                     </div>
                     <h4>نتائج ملموسة</h4>
                     <p>نركز على تحقيق نتائج إيجابية وملموسة في حياة المستفيدين.</p>
                 </div>
-                <div class="feature-card" style="animation: slideInUp 0.6s ease-out 0.3s backwards;">
+                <div class="feature-card reveal-up delay-3">
                     <div class="feature-icon">
                         <i class="bi bi-eye"></i>
                     </div>

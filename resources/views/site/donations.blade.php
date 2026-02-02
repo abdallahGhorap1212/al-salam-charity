@@ -14,20 +14,20 @@
     <section class="section-block">
         <div class="container">
             <!-- Donation Types Info -->
-            <div class="donation-types-grid mb-5" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-                <div class="donation-type-card donation-type-card--primary" style="animation: slideInUp 0.6s ease-out;">
-                    <div class="icon"><i class="bi bi-gift-heart"></i></div>
+            <div class="donation-types-grid mb-5">
+                <div class="donation-type-card donation-type-card--primary reveal-up">
+                    <div class="icon"><i class="bi bi-gift"></i></div>
                     <h3>تبرع عام</h3>
                     <p>ساهم بمبلغ من اختيارك لدعم كل مشاريعنا.</p>
                     <span class="badge bg-success">الأكثر اختياراً</span>
                 </div>
-                <div class="donation-type-card donation-type-card--secondary" style="animation: slideInUp 0.6s ease-out 0.1s backwards;">
+                <div class="donation-type-card donation-type-card--secondary reveal-up delay-1">
                     <div class="icon"><i class="bi bi-heart-fill"></i></div>
                     <h3>تبرع موجه</h3>
                     <p>اختر خدمة معينة وساهم في دعمها مباشرة.</p>
                     <span class="badge bg-info">تأثير مباشر</span>
                 </div>
-                <div class="donation-type-card donation-type-card--accent" style="animation: slideInUp 0.6s ease-out 0.2s backwards;">
+                <div class="donation-type-card donation-type-card--accent reveal-up delay-2">
                     <div class="icon"><i class="bi bi-calendar2-check"></i></div>
                     <h3>تبرع دوري</h3>
                     <p>تبرع شهري منتظم لضمان استدامة برامجنا.</p>
@@ -35,8 +35,8 @@
                 </div>
             </div>
 
-            <div class="content-card" style="display: grid; grid-template-columns: 1fr 350px; gap: 3rem; align-items: start;">
-                <div class="content-main" style="animation: slideInLeft 0.6s ease-out;">
+            <div class="content-card content-card--split">
+                <div class="content-main reveal-left">
                     <form action="{{ route('site.donations.store') }}" method="POST" class="form-stack" id="donationForm">
                         @csrf
                         <fieldset>
@@ -150,7 +150,7 @@
                             </div>
                         </fieldset>
 
-                        <div class="form-actions">
+                        <div class="form-actions reveal-up delay-3">
                             <button type="submit" class="site-cta site-cta--large">
                                 <i class="bi bi-check-circle"></i> إرسال طلب التبرع
                             </button>
@@ -162,43 +162,43 @@
                     </form>
                 </div>
 
-                <div class="content-side" style="animation: slideInRight 0.6s ease-out;">
-                    <div class="sidebar-card sidebar-card--primary" style="animation: zoomIn 0.6s ease-out 0.2s backwards;">
+                <div class="content-side reveal-right">
+                    <div class="sidebar-card sidebar-card--primary reveal-zoom delay-1">
                         <h4><i class="bi bi-question-circle"></i> أسئلة شائعة</h4>
                         <div class="faq-section">
-                            <div class="faq-item" style="animation: fadeInUp 0.6s ease-out 0.3s backwards;">
+                            <div class="faq-item reveal-up delay-2">
                                 <strong>هل تبرعي آمن؟</strong>
                                 <p>نعم، نتبع أعلى معايير الأمان والشفافية في التعامل مع التبرعات.</p>
                             </div>
-                            <div class="faq-item" style="animation: fadeInUp 0.6s ease-out 0.4s backwards;">
+                            <div class="faq-item reveal-up delay-3">
                                 <strong>كيف سأتابع تبرعي؟</strong>
                                 <p>سنرسل لك تقارير دورية عن استخدام تبرعك والأثر الذي أحدثه.</p>
                             </div>
-                            <div class="faq-item" style="animation: fadeInUp 0.6s ease-out 0.5s backwards;">
+                            <div class="faq-item reveal-up delay-4">
                                 <strong>هل يمكنني تبرع دوري؟</strong>
                                 <p>نعم، يمكنك التبرع بشكل دوري منتظم. تواصل معنا للترتيبات اللازمة.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="sidebar-card sidebar-card--secondary" style="animation: zoomIn 0.6s ease-out 0.3s backwards;">
+                    <div class="sidebar-card sidebar-card--secondary reveal-zoom delay-2">
                         <h4><i class="bi bi-telephone-outbound"></i> تواصل معنا مباشرة</h4>
                         <ul class="contact-info">
-                            <li style="animation: fadeInUp 0.6s ease-out 0.4s backwards;">
+                            <li class="reveal-up delay-3">
                                 <i class="bi bi-telephone"></i> 
                                 <strong>الهاتف:</strong><br>
                                 <a href="tel:{{ str_replace([' ', '-'], '', $about->phone ?? '') }}">
                                     {{ $about->phone ?? 'سيتم إضافة الرقم قريبًا' }}
                                 </a>
                             </li>
-                            <li style="animation: fadeInUp 0.6s ease-out 0.5s backwards;">
+                            <li class="reveal-up delay-4">
                                 <i class="bi bi-envelope"></i> 
                                 <strong>البريد:</strong><br>
                                 <a href="mailto:{{ $about->email ?? 'info@example.com' }}">
                                     {{ $about->email ?? 'info@example.com' }}
                                 </a>
                             </li>
-                            <li style="animation: fadeInUp 0.6s ease-out 0.6s backwards;">
+                            <li class="reveal-up delay-5">
                                 <i class="bi bi-geo-alt"></i> 
                                 <strong>العنوان:</strong><br>
                                 {{ $about->address ?? 'سيتم إضافة العنوان قريبًا' }}

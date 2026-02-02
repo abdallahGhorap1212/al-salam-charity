@@ -23,7 +23,7 @@ class SettingsController extends Controller
     public function colors()
     {
         $colors = SiteSetting::getByCategory('colors');
-        // تحويل القيم من مصفوفة ['key' => ['value' => ...]] إلى ['key' => value]
+        // Convert values from ['key' => ['value' => ...]] to ['key' => value]
         $colors = collect($colors)->mapWithKeys(fn($item, $key) => [$key => is_array($item['value']) ? json_encode($item['value'], JSON_UNESCAPED_UNICODE) : $item['value']])->toArray();
         return view('admin.settings.colors', compact('colors'));
     }

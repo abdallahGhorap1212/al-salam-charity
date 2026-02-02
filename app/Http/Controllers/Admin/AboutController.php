@@ -20,7 +20,7 @@ class AboutController extends Controller
     public function edit(): View
     {
         $about = $this->aboutService->getOrCreate();
-        // جلب روابط التواصل من الإعدادات
+        // Fetch social links from settings
         $social = \App\Support\SettingsHelper::getSocialLinks();
         return view('admin.about.edit', compact('about', 'social'));
     }

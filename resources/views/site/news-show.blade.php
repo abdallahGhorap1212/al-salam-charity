@@ -1,20 +1,20 @@
 @extends('site.layouts.app')
 
 @section('content')
-    <section class="page-hero" style="background: linear-gradient(135deg, rgba(23, 121, 186, 0.9), rgba(41, 128, 185, 0.9)), url('{{ $news->cover_image_url ?? asset('images/placeholder.jpg') }}') center/cover; color: white;">
-        <div class="container" style="display: grid; grid-template-columns: 1fr; gap: 2rem; padding: 4rem 0;">
-            <div style="max-width: 800px;">
-                <h1 style="font-size: 2.5rem; margin-bottom: 1.5rem; animation: slideInUp 0.6s ease-out;">{{ $news->title }}</h1>
-                <div style="display: grid; grid-template-columns: auto auto; gap: 2rem; align-items: center; animation: slideInUp 0.6s ease-out 0.2s backwards;">
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                        <i class="bi bi-calendar-event" style="font-size: 1.25rem;"></i>
-                        <time datetime="{{ optional($news->published_at)?->toIso8601String() ?? $news->created_at->toIso8601String() }}" style="font-size: 1.1rem; font-weight: 500;">
+    <section class="page-hero page-hero--image" style="--hero-image: url('{{ $news->cover_image_url ?? asset('images/placeholder.jpg') }}');">
+        <div class="container page-hero__inner">
+            <div class="page-hero__content reveal-up">
+                <h1>{{ $news->title }}</h1>
+                <div class="page-hero__meta">
+                    <div class="meta-item">
+                        <i class="bi bi-calendar-event"></i>
+                        <time datetime="{{ optional($news->published_at)?->toIso8601String() ?? $news->created_at->toIso8601String() }}">
                             {{ optional($news->published_at)?->translatedFormat('d F Y') ?? $news->created_at->translatedFormat('d F Y') }}
                         </time>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 0.75rem;">
-                        <i class="bi bi-clock-history" style="font-size: 1.25rem;"></i>
-                        <span style="font-size: 1rem; opacity: 0.9;">{{ ceil(strlen(strip_tags($news->body)) / 200) }} دقائق قراءة</span>
+                    <div class="meta-item">
+                        <i class="bi bi-clock-history"></i>
+                        <span>{{ ceil(strlen(strip_tags($news->body)) / 200) }} دقائق قراءة</span>
                     </div>
                 </div>
             </div>
@@ -23,8 +23,8 @@
 
     <section class="section-block">
         <div class="container">
-            <div class="content-card" style="display: grid; grid-template-columns: 1fr 350px; gap: 3rem; align-items: start;">
-                <div class="content-main" style="animation: slideInLeft 0.6s ease-out;">
+            <div class="content-card content-card--split">
+                <div class="content-main reveal-left">
                     @if ($news->cover_image_url)
                         <img src="{{ $news->cover_image_url }}" alt="{{ $news->title }}" class="content-image">
                     @endif
@@ -33,14 +33,14 @@
                     @endif
                     <div class="news-body">{!! $bodyHtml !!}</div>
                     @if ($news->images->count())
-                        <div class="news-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                        <div class="news-gallery">
                             @foreach ($news->images as $index => $image)
-                                <img src="{{ $image->url }}" alt="{{ $news->title }}" style="border-radius: 8px; object-fit: cover; animation: zoomIn 0.6s ease-out {{ $index * 0.1 }}s backwards;">
+                                <img src="{{ $image->url }}" alt="{{ $news->title }}" class="reveal-zoom" style="--delay: {{ $index * 0.1 }}s;">
                             @endforeach
                         </div>
                     @endif
                 </div>
-                <div class="content-side" style="animation: slideInRight 0.6s ease-out;">
+                <div class="content-side reveal-right">
                     @if ($news->sponsor_title || $news->sponsor_body || $news->sponsor_link)
                         <div class="ad-card">
                             <span class="ad-label">مساحة إعلان</span>

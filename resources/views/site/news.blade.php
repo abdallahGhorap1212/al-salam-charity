@@ -14,9 +14,9 @@
     <section class="section-block">
         <div class="container">
             @if($news->count() > 0)
-                <div class="news-grid news-grid--page" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="news-grid news-grid--page">
                     @forelse ($news as $index => $item)
-                        <article class="news-card news-card--featured" style="animation: fadeInUp 0.6s ease-out {{ $index * 0.1 }}s backwards;">
+                        <article class="news-card news-card--featured reveal-up" style="--delay: {{ $index * 0.1 }}s;">
                             <div class="news-card-media">
                                 @if ($item->cover_image_url)
                                     <img 
@@ -30,8 +30,8 @@
                                     </div>
                                 @endif
                                 @if($item->published_at)
-                                    <span class="news-badge" style="background: linear-gradient(135deg, rgba(23, 121, 186, 0.95), rgba(41, 128, 185, 0.95)); backdrop-filter: blur(10px); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; position: absolute; top: 1rem; right: 1rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
-                                        <i class="bi bi-calendar2-check" style="font-size: 0.9rem;"></i>
+                                    <span class="news-badge">
+                                        <i class="bi bi-calendar2-check"></i>
                                         {{ $item->published_at->translatedFormat('d M Y') }}
                                     </span>
                                 @endif
@@ -88,15 +88,15 @@
                     <h2>ابق على اطلاع دائم</h2>
                     <p>تابعنا على وسائل التواصل الاجتماعي للحصول على آخر الأخبار والمستجدات.</p>
                 </div>
-                <div class="social-links-cta" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1.5rem;">
-                    <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="فيسبوك" title="تابعنا على فيسبوك" style="animation: slideInUp 0.6s ease-out 0.3s backwards; display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0.875rem 1.25rem; border-radius: 8px; background: linear-gradient(135deg, #1877F2, #0A66C2); color: white; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(24, 119, 242, 0.2); font-weight: 500;">
-                        <i class="bi bi-facebook" style="font-size: 1.25rem;"></i> فيسبوك
+                <div class="social-links-cta">
+                    <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="فيسبوك" title="تابعنا على فيسبوك" class="social-pill social-pill--facebook reveal-up delay-2">
+                        <i class="bi bi-facebook"></i> فيسبوك
                     </a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="تويتر" title="تابعنا على تويتر" style="animation: slideInUp 0.6s ease-out 0.4s backwards; display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0.875rem 1.25rem; border-radius: 8px; background: linear-gradient(135deg, #1DA1F2, #1a8917); color: white; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(29, 161, 242, 0.2); font-weight: 500;">
-                        <i class="bi bi-twitter" style="font-size: 1.25rem;"></i> تويتر
+                    <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="تويتر" title="تابعنا على تويتر" class="social-pill social-pill--twitter reveal-up delay-3">
+                        <i class="bi bi-twitter"></i> تويتر
                     </a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="إنستجرام" title="تابعنا على إنستجرام" style="animation: slideInUp 0.6s ease-out 0.5s backwards; display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0.875rem 1.25rem; border-radius: 8px; background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF); color: white; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(245, 133, 41, 0.2); font-weight: 500;">
-                        <i class="bi bi-instagram" style="font-size: 1.25rem;"></i> إنستجرام
+                    <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="إنستجرام" title="تابعنا على إنستجرام" class="social-pill social-pill--instagram reveal-up delay-4">
+                        <i class="bi bi-instagram"></i> إنستجرام
                     </a>
                 </div>
             </div>

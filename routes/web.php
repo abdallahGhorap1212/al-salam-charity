@@ -71,7 +71,7 @@ Route::middleware('auth')
         Route::put('terms-and-conditions', [TermsAndConditionsController::class, 'update'])->name('terms-and-conditions.update');
         Route::resource('contact-messages', ContactMessageController::class)->only(['index', 'show', 'destroy']);
         Route::resource('donation-requests', DonationRequestController::class)->only(['index', 'show', 'edit', 'update', 'destroy']);
-            // إعدادات الموقع
+            // Site settings
             Route::get('settings', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('settings.index');
             Route::get('settings/colors', [\App\Http\Controllers\Admin\SettingsController::class, 'colors'])->name('settings.colors');
             Route::post('settings/colors', [\App\Http\Controllers\Admin\SettingsController::class, 'updateColors'])->name('settings.colors.update');

@@ -23,7 +23,7 @@
         </div>
     </section>
 
-    <!-- روابط الإدارة السريعة -->
+    <!-- Quick admin links -->
     <section class="row g-3 mb-4">
         <div class="col-md-6 col-lg-3">
             <a href="{{ route('admin.news.index') }}" class="quick-link-card">
@@ -94,7 +94,7 @@
         </section>
     @endif
 
-    <!-- الإحصائيات الرئيسية -->
+    <!-- Main statistics -->
     <section class="row g-3 mb-4">
         <div class="col-sm-6 col-xl-3">
             <div class="stat-card">
@@ -164,7 +164,7 @@
         </div>
     </section>
 
-    <!-- الرسوم البيانية -->
+    <!-- Charts -->
     <section class="row g-3 mb-4">
         <div class="col-xl-6">
             <div class="panel-card">
@@ -198,7 +198,7 @@
         </div>
     </section>
 
-    <!-- الإحصائيات المتقدمة -->
+    <!-- Advanced statistics -->
     <section class="row g-3 mb-4">
         <div class="col-md-6 col-lg-3">
             <div class="quick-stat">
@@ -246,7 +246,7 @@
         </div>
     </section>
 
-    <!-- تحليل الحالات -->
+    <!-- Case analysis -->
     <section class="row g-4 mb-4">
         <div class="col-xl-6">
             <div class="panel-card">
@@ -312,7 +312,7 @@
         </div>
     </section>
 
-    <!-- نشاط اليوم -->
+    <!-- Today's activity -->
     @php $todayActivity = $stats['today_activity'] ?? []; @endphp
     @if (($todayActivity['new_cases'] ?? [])->count() > 0 || ($todayActivity['new_distributions'] ?? [])->count() > 0)
         <section class="row g-4 mb-4">
@@ -373,7 +373,7 @@
         </section>
     @endif
 
-    <!-- أداء الموظفين -->
+    <!-- Staff performance -->
     @if (($stats['staff_performance'] ?? []) && count($stats['staff_performance']) > 0)
         <section class="row g-4 mb-4">
             <div class="col-12">
@@ -446,7 +446,7 @@
         </section>
     @endif
 
-    <!-- الجداول الرئيسية -->
+    <!-- Main tables -->
     <section class="row g-4">
         <div class="col-xl-7">
             <div class="panel-card h-100">
@@ -553,7 +553,7 @@
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script>
-        // رسم بياني: توزيع الحالات حسب المنطقة
+        // Chart: case distribution by area
         @if (isset($stats['cases_by_area_chart']))
             const areaCtx = document.getElementById('casesByAreaChart');
             if (areaCtx) {
@@ -587,7 +587,7 @@
             }
         @endif
 
-        // رسم بياني: توزيع الحالات حسب النوع
+        // Chart: case distribution by type
         @if (isset($stats['cases_by_type_chart']))
             const typeCtx = document.getElementById('casesByTypeChart');
             if (typeCtx) {

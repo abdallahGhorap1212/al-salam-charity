@@ -13,15 +13,15 @@
 
     <section class="section-block">
         <div class="container">
-            <div class="content-card" style="display: grid; grid-template-columns: 1fr 350px; gap: 3rem; align-items: start;">
-                <div class="content-main" style="animation: slideInLeft 0.6s ease-out;">
+            <div class="content-card content-card--split">
+                <div class="content-main reveal-left">
                     <form action="{{ route('site.contact.store') }}" method="POST" class="form-stack" id="contactForm">
                         @csrf
                         <fieldset>
                             <legend><strong>بيانات التواصل</strong></legend>
 
                             <div class="row">
-                                <div class="col-md-6 mb-3" style="animation: slideInUp 0.6s ease-out 0.1s backwards;">
+                                <div class="col-md-6 mb-3 reveal-up delay-1">
                                     <label class="form-label" for="senderName">
                                         <i class="bi bi-person"></i> الاسم الكامل
                                         <span class="required">*</span>
@@ -35,7 +35,7 @@
                                         required
                                         aria-describedby="nameHelp">
                                 </div>
-                                <div class="col-md-6 mb-3" style="animation: slideInUp 0.6s ease-out 0.2s backwards;">
+                                <div class="col-md-6 mb-3 reveal-up delay-2">
                                     <label class="form-label" for="senderEmail">
                                         <i class="bi bi-envelope"></i> البريد الإلكتروني
                                         <span class="required">*</span>
@@ -52,7 +52,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6 mb-3" style="animation: slideInUp 0.6s ease-out 0.3s backwards;">
+                                <div class="col-md-6 mb-3 reveal-up delay-3">
                                     <label class="form-label" for="senderPhone">
                                         <i class="bi bi-telephone"></i> رقم الهاتف
                                     </label>
@@ -65,7 +65,7 @@
                                         placeholder="+966 50 0000000"
                                         aria-describedby="phoneHelp">
                                 </div>
-                                <div class="col-md-6 mb-3" style="animation: slideInUp 0.6s ease-out 0.4s backwards;">
+                                <div class="col-md-6 mb-3 reveal-up delay-4">
                                     <label class="form-label" for="messageSubject">
                                         <i class="bi bi-chat-square-quote"></i> موضوع الرسالة
                                         <span class="required">*</span>
@@ -102,7 +102,7 @@
                             </div>
                         </fieldset>
 
-                        <div class="form-actions">
+                        <div class="form-actions reveal-up delay-5">
                             <button type="submit" class="site-cta site-cta--large">
                                 <i class="bi bi-send"></i> إرسال الرسالة
                             </button>
@@ -113,23 +113,23 @@
                     </form>
                 </div>
 
-                <div class="content-side" style="animation: slideInRight 0.6s ease-out;">
-                    <div class="sidebar-card sidebar-card--primary" style="animation: zoomIn 0.6s ease-out 0.2s backwards;">
+                <div class="content-side reveal-right">
+                    <div class="sidebar-card sidebar-card--primary reveal-zoom delay-1">
                         <h4><i class="bi bi-telephone-outbound"></i> بيانات التواصل المباشرة</h4>
                         <ul class="contact-info">
-                            <li style="animation: fadeInUp 0.6s ease-out 0.3s backwards; display: flex; align-items: center; gap: 0.5rem;">
+                            <li class="reveal-up delay-2">
                                 <i class="bi bi-telephone-fill"></i>
-                                <a href="tel:{{ str_replace([' ', '-'], '', $about->phone ?? '') }}" style="margin-right: 0.5rem;">
+                                <a href="tel:{{ str_replace([' ', '-'], '', $about->phone ?? '') }}">
                                     {{ $about->phone ?? 'سيتم إضافة الرقم قريبًا' }}
                                 </a>
                             </li>
-                            <li style="animation: fadeInUp 0.6s ease-out 0.4s backwards; display: flex; align-items: center; gap: 0.5rem;">
+                            <li class="reveal-up delay-3">
                                 <i class="bi bi-envelope-fill"></i>
-                                <a href="mailto:{{ $about->email ?? 'info@example.com' }}" style="margin-right: 0.5rem;">
+                                <a href="mailto:{{ $about->email ?? 'info@example.com' }}">
                                     {{ $about->email ?? 'info@example.com' }}
                                 </a>
                             </li>
-                            <li style="animation: fadeInUp 0.6s ease-out 0.5s backwards; display: flex; align-items: center; gap: 0.5rem;">
+                            <li class="reveal-up delay-4">
                                 <i class="bi bi-geo-alt-fill"></i>
                                 <span>{{ $about->address ?? 'سيتم إضافة العنوان قريبًا' }}</span>
                             </li>

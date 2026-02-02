@@ -178,7 +178,7 @@
                 $areaIndex = abs(crc32($areaKey)) % count($palette);
                 $areaColor = $palette[$areaIndex];
             @endphp
-            <!-- الوجه الأمامي -->
+            <!-- Front side -->
             <div class="card-page">
                 <div class="card" style="--area-color: {{ $areaColor }};">
                     <div class="card-top"></div>
@@ -220,7 +220,7 @@
                 </div>
             </div>
 
-            <!-- الظهر -->
+            <!-- Back side -->
             <div class="card-page">
                 <div class="card back-card" style="--area-color: {{ $areaColor }};">
                     <div class="card-top"></div>

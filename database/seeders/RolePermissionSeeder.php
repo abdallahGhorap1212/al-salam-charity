@@ -18,7 +18,7 @@ class RolePermissionSeeder extends Seeder
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // إنشاء الصلاحيات
+        // Create permissions
         $permissions = [
             // Users
             'view-users',
@@ -106,16 +106,16 @@ class RolePermissionSeeder extends Seeder
             Permission::firstOrCreate(['name' => $permission]);
         }
 
-        // إنشاء الأدوار
+        // Create roles
         $adminRole = Role::firstOrCreate(['name' => 'Admin']);
         $managerRole = Role::firstOrCreate(['name' => 'Manager']);
         $dataEntryRole = Role::firstOrCreate(['name' => 'Data Entry']);
         $viewerRole = Role::firstOrCreate(['name' => 'Viewer']);
 
-        // منح كل الصلاحيات للـ Admin
+        // Grant all permissions to Admin
         $adminRole->givePermissionTo(Permission::all());
 
-        // منح صلاحيات محددة للـ Manager
+        // Grant specific permissions to Manager
         $managerRole->givePermissionTo([
             'view-settings',
             'view-users',
@@ -168,7 +168,7 @@ class RolePermissionSeeder extends Seeder
             'manage-distribution-types',
         ]);
 
-        // منح صلاحيات محددة للـ Data Entry
+        // Grant specific permissions to Data Entry
         $dataEntryRole->givePermissionTo([
             'view-areas',
             'view-case-types',

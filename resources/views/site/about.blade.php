@@ -11,18 +11,17 @@
         </div>
     </section>
 
-    <!-- Mission and Vision Section -->
     <section class="section-block">
         <div class="container">
-            <div class="mission-vision-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-                <div class="mission-card" style="animation: slideInUp 0.6s ease-out;">
+            <div class="mission-vision-grid">
+                <div class="mission-card reveal-up">
                     <div class="card-icon mission-icon">
-                        <i class="bi bi-target"></i>
+                        <i class="bi bi-bullseye"></i>
                     </div>
                     <h3>رسالتنا</h3>
                     <p>{{ $about->mission ?? 'خدمة المجتمع وتعزيز قيم التكافل الاجتماعي.' }}</p>
                 </div>
-                <div class="vision-card" style="animation: slideInUp 0.6s ease-out 0.1s backwards;">
+                <div class="vision-card reveal-up delay-1">
                     <div class="card-icon vision-icon">
                         <i class="bi bi-eye"></i>
                     </div>
@@ -33,48 +32,50 @@
         </div>
     </section>
 
-    <!-- About Content Section -->
     <section class="section-block section-light">
         <div class="container">
             <div class="about-grid">
                 <div class="about-content">
                     <h2>{{ $about->title ?? 'جمعية السلام' }}</h2>
                     <p class="lead">{{ $about->body ?? 'نعمل على إطلاق مبادرات تنموية مستدامة، ونقدّم الدعم للأسر الأكثر احتياجًا.' }}</p>
+                    <p class="org-legal">
+                        <span>جمعية السلام الإجتماعية بسلامون القماش</span>
+                        <span>المشهرة برقم 854 بتاريخ 7/8/1999</span>
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Values Section -->
     <section class="section-block">
         <div class="container">
             <div class="section-head">
                 <h2><i class="bi bi-award"></i> قيمنا الأساسية</h2>
                 <p>المبادئ التي توجه كل عملنا وتحركنا نحو الهدف.</p>
             </div>
-            <div class="values-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-                <div class="value-card" style="animation: fadeInUp 0.6s ease-out;">
+            <div class="values-grid">
+                <div class="value-card reveal-up">
                     <div class="value-icon social-justice">
-                        <i class="bi bi-scales"></i>
+                        <i class="bi bi-people"></i>
                     </div>
                     <h4>العدالة الاجتماعية</h4>
                     <p>معاملة جميع الأسر بمساواة واحترام دون تمييز</p>
                 </div>
-                <div class="value-card" style="animation: fadeInUp 0.6s ease-out 0.1s backwards;">
+                <div class="value-card reveal-up delay-1">
                     <div class="value-icon sustainability">
-                        <i class="bi bi-plant"></i>
+                        <i class="bi bi-tree"></i>
                     </div>
                     <h4>الاستدامة</h4>
                     <p>برامج طويلة الأجل تحدث تأثيرًا حقيقيًا ودائمًا</p>
                 </div>
-                <div class="value-card" style="animation: fadeInUp 0.6s ease-out 0.2s backwards;">
+                <div class="value-card reveal-up delay-2">
                     <div class="value-icon transparency">
-                        <i class="bi bi-eye-fill"></i>
+                        <i class="bi bi-eye"></i>
                     </div>
                     <h4>الشفافية</h4>
                     <p>الوضوح التام في أداء المشاريع والميزانيات</p>
                 </div>
-                <div class="value-card" style="animation: fadeInUp 0.6s ease-out 0.3s backwards;">
+                <div class="value-card reveal-up delay-3">
                     <div class="value-icon efficiency">
                         <i class="bi bi-speedometer"></i>
                     </div>
@@ -85,40 +86,39 @@
         </div>
     </section>
 
-    <!-- Statistics Section -->
     <section class="section-block section-accent">
         <div class="container">
             <div class="section-head">
                 <h2><i class="bi bi-bar-chart"></i> إحصائيات الأداء</h2>
                 <p>أرقام تعكس تأثيرنا المستمر في المجتمع.</p>
             </div>
-            <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-                <div class="stat-box" style="animation: zoomIn 0.6s ease-out;">
+            <div class="stats-grid">
+                <div class="stat-box reveal-zoom">
                     <div class="stat-icon families">
                         <i class="bi bi-people-fill"></i>
                     </div>
                     <div class="stat-content">
-                        <h3 style="animation: countUp 0.6s ease-out;">{{ $totalCases ?? 0 }}</h3>
+                        <h3>{{ $totalCases ?? 0 }}</h3>
                         <p>عائلة استفادت</p>
                         <small>من خدماتنا وبرامجنا</small>
                     </div>
                 </div>
-                <div class="stat-box" style="animation: zoomIn 0.6s ease-out 0.1s backwards;">
+                <div class="stat-box reveal-zoom delay-1">
                     <div class="stat-icon projects">
                         <i class="bi bi-boxes"></i>
                     </div>
                     <div class="stat-content">
-                        <h3 style="animation: countUp 0.6s ease-out 0.1s backwards;">{{ $totalDistributions ?? 0 }}</h3>
+                        <h3>{{ $totalDistributions ?? 0 }}</h3>
                         <p>مشروع منفذ</p>
                         <small>بنجاح وفعالية</small>
                     </div>
                 </div>
-                <div class="stat-box" style="animation: zoomIn 0.6s ease-out 0.2s backwards;">
+                <div class="stat-box reveal-zoom delay-2">
                     <div class="stat-icon team">
                         <i class="bi bi-person-heart"></i>
                     </div>
                     <div class="stat-content">
-                        <h3 style="animation: countUp 0.6s ease-out 0.2s backwards;">{{ $totalMembers ?? 0 }}</h3>
+                        <h3>{{ $totalMembers ?? 0 }}</h3>
                         <p>متطوع وموظف</p>
                         <small>يعملون بشغف وإخلاص</small>
                     </div>
@@ -127,7 +127,6 @@
         </div>
     </section>
 
-    <!-- Board Members Section -->
     <section class="section-block">
         <div class="container">
             <div class="section-head">

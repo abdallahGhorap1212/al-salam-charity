@@ -30,7 +30,7 @@ class DashboardService
         $yesterdayDistributions = AidDistribution::whereDate('distribution_date', $yesterday)->count();
         
         return [
-            // الإحصائيات الأساسية
+            // Core statistics
             'total_cases' => $totalCases,
             'active_cases' => $activeCases,
             'inactive_cases' => CaseModel::where('is_active', false)->count(),
@@ -39,16 +39,16 @@ class DashboardService
             'total_distributions' => $totalDistributions,
             'total_users' => User::count(),
             
-            // إحصائيات اليوم
+            // Today's statistics
             'today_cases' => $todayCases,
             'today_distributions' => $todayDistributions,
             
-            // اتجاهات البيانات
+            // Data trends
             'cases_trend' => $this->calculateTrend($todayCases, $yesterdayCases),
             'distributions_trend' => $this->calculateTrend($todayDistributions, $yesterdayDistributions),
             'weekly_cases_trend' => $this->calculateTrend($last7DaysCases, CaseModel::whereDate('created_at', '>=', $last7Days->copy()->subDays(7))->whereDate('created_at', '<', $last7Days)->count()),
             
-            // توزيع الحالات حسب المنطقة (للرسوم البيانية)
+            // Case distribution by area (for charts)
             'cases_by_area' => Area::withCount('cases')->get(),
             'cases_by_area_chart' => $this->formatChartData(
                 Area::withCount('cases')->get(),
@@ -56,7 +56,7 @@ class DashboardService
                 'cases_count'
             ),
             
-            // توزيع الحالات حسب النوع (للرسوم البيانية)
+            // Case distribution by type (for charts)
             'cases_by_type' => CaseType::withCount('cases')->get(),
             'cases_by_type_chart' => $this->formatChartData(
                 CaseType::withCount('cases')->get(),
@@ -64,16 +64,16 @@ class DashboardService
                 'cases_count'
             ),
             
-            // الإحصائيات المتقدمة
+            // Advanced statistics
             'advanced_stats' => $this->getAdvancedStatistics(),
             
-            // تنبيهات النظام
+            // System alerts
             'alerts' => $this->getSystemAlerts($today),
             
-            // أداء الموظفين
+            // Staff performance
             'staff_performance' => $this->getStaffPerformance(),
             
-            // البيانات الأخيرة
+            // Recent data
             'recent_cases' => CaseModel::with(['area', 'caseType'])
                 ->latest()
                 ->take(5)
@@ -83,7 +83,7 @@ class DashboardService
                 ->take(5)
                 ->get(),
             
-            // نشاط اليوم
+            // Today's activity
             'today_activity' => $this->getTodayActivity($today),
         ];
     }
@@ -126,7 +126,7 @@ class DashboardService
             ? round(($casesWithDistributions->count() / $allCases->count()) * 100, 1)
             : 0;
         
-        // متوسط الأيام لكل حالة
+        // Average days per case
         $avgDaysPerCase = 0;
         if ($casesWithDistributions->count() > 0) {
             $totalDays = $casesWithDistributions->sum(function($case) {
@@ -137,7 +137,7 @@ class DashboardService
             $avgDaysPerCase = round($totalDays / $casesWithDistributions->count(), 1);
         }
         
-        // توزيع الحالات حسب النوع
+        // Case distribution by type
         $caseTypeDistribution = CaseType::withCount('cases')
             ->get()
             ->map(fn($type) => [
@@ -161,7 +161,7 @@ class DashboardService
     {
         $alerts = [];
         
-        // تنبيهات الحالات المتقادمة (أكثر من 60 يوم)
+        // Outdated case alerts (over 60 days)
         $outdatedCases = CaseModel::where('created_at', '<', $today->copy()->subDays(60))
             ->where('is_active', true)
             ->count();
@@ -175,7 +175,7 @@ class DashboardService
             ];
         }
         
-        // تنبيهات الحالات التي لم يتم صرفها
+        // Undistributed case alerts
         $neverDistributed = CaseModel::where('is_active', true)
             ->whereDoesntHave('aidDistributions')
             ->count();
@@ -189,7 +189,7 @@ class DashboardService
             ];
         }
         
-        // تنبيهات الموظفين غير النشطين
+        // Inactive staff alerts
         $inactiveUsers = User::where('is_active', false)->count();
         if ($inactiveUsers > 0) {
             $alerts[] = [
@@ -201,7 +201,7 @@ class DashboardService
             ];
         }
         
-        // تنبيهات الحالات المعطلة
+        // Inactive case alerts
         $inactiveCases = CaseModel::where('is_active', false)->count();
         if ($inactiveCases > 0 && $inactiveCases > CaseModel::count() / 4) {
             $alerts[] = [
@@ -221,10 +221,10 @@ class DashboardService
         $users = User::with(['roles', 'cases'])
             ->get()
             ->map(function($user) {
-                // عدد الحالات المسندة
+                // Assigned cases count
                 $assignedCases = CaseModel::where('user_id', $user->id)->count();
                 
-                // عدد الحالات المحل
+                // Resolved cases count
                 $resolvedCases = CaseModel::where('user_id', $user->id)
                     ->whereHas('aidDistributions')
                     ->count();
@@ -233,7 +233,7 @@ class DashboardService
                     ? round(($resolvedCases / $assignedCases) * 100, 1)
                     : 0;
                 
-                // عمليات الصرف
+                // Distributions count
                 $distributions = AidDistribution::where('user_id', $user->id)->count();
                 
                 return [

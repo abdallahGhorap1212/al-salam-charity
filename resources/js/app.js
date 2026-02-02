@@ -189,3 +189,25 @@ wysiwygs.forEach((wrapper) => {
         form.addEventListener('submit', sync);
     }
 });
+
+const navToggle = document.querySelector('.site-nav-toggle');
+const siteNav = document.querySelector('.site-nav');
+
+if (navToggle && siteNav) {
+    const updateState = (isOpen) => {
+        navToggle.classList.toggle('is-open', isOpen);
+        siteNav.classList.toggle('is-open', isOpen);
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+    };
+
+    navToggle.addEventListener('click', () => {
+        const isOpen = siteNav.classList.contains('is-open');
+        updateState(!isOpen);
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            updateState(false);
+        }
+    });
+}

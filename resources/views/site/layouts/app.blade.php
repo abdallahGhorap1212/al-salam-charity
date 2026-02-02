@@ -55,7 +55,12 @@
                         <small>مؤسسة خيرية | معًا لنصنع أثرًا حقيقيًا</small>
                     </span>
                 </a>
-                <nav class="site-nav" role="navigation" aria-label="القائمة الرئيسية">
+                <button class="site-nav-toggle" type="button" aria-label="فتح القائمة" aria-expanded="false" aria-controls="siteNav">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav id="siteNav" class="site-nav" role="navigation" aria-label="القائمة الرئيسية">
                     <a href="{{ route('site.home') }}" class="nav-link {{ request()->routeIs('site.home') ? 'active' : '' }}" aria-current="{{ request()->routeIs('site.home') ? 'page' : 'false' }}">
                         <i class="bi bi-house"></i> الرئيسية
                     </a>
@@ -88,18 +93,22 @@
 
     <footer class="site-footer" role="contentinfo">
         <div class="container">
-            <div class="site-footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                <div class="footer-section" style="animation: fadeInUp 0.6s ease-out;">
+            <div class="site-footer-grid">
+                <div class="footer-section reveal-up">
                     <div class="site-footer-brand">
                         <img src="{{ asset('images/logo-transparent.png') }}" alt="شعار جمعية السلام">
                         <div>
                             <strong>جمعية السلام</strong>
                             <p>{{ $about->summary ?? 'نخدم المجتمع بمبادرات إنسانية مستدامة وقيم التكافل الاجتماعي.' }}</p>
+                            <small class="footer-legal">
+                                <span>جمعية السلام الإجتماعية بسلامون القماش</span>
+                                <span>المشهرة برقم 854 بتاريخ 7/8/1999</span>
+                            </small>
                         </div>
                     </div>
                 </div>
                 
-                <div class="footer-section" style="animation: fadeInUp 0.6s ease-out 0.1s backwards;">
+                <div class="footer-section reveal-up delay-1">
                     <h6>روابط سريعة</h6>
                     <ul class="footer-links">
                         <li><a href="{{ route('site.home') }}" title="الذهاب للصفحة الرئيسية">الرئيسية</a></li>
@@ -111,15 +120,15 @@
                     </ul>
                 </div>
                 
-                <div class="footer-section" style="animation: fadeInUp 0.6s ease-out 0.2s backwards;">
+                <div class="footer-section reveal-up delay-2">
                     <h6>التبرعات والمساهمات</h6>
                     <p>يمكنك التبرع بشكل عام أو تحديد خدمة بعينها لدعم المشاريع التي تهمك.</p>
                     <a class="site-link site-link--primary" href="{{ route('site.donations') }}" title="اذهب لصفحة التبرعات"><i class="bi bi-hand-thumbs-up"></i> تبرع الآن</a>
                 </div>
                 
-                <div class="footer-section" style="animation: fadeInUp 0.6s ease-out 0.3s backwards;">
+                <div class="footer-section reveal-up delay-3">
                     <h6>تابعنا على وسائل التواصل</h6>
-                    <div class="social-links" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(45px, 1fr)); gap: 1.5rem; max-width: 250px;">
+                    <div class="social-links">
                         @php
                             $social = \App\Support\SettingsHelper::getSocialLinks();
                             $icons = [
@@ -130,20 +139,16 @@
                                 'youtube' => 'youtube',
                                 'whatsapp' => 'whatsapp',
                             ];
-                            $styles = [
-                                'facebook' => 'background: linear-gradient(135deg, #1877F2, #0A66C2); color: white; box-shadow: 0 4px 12px rgba(24,119,242,0.3);',
-                                'twitter' => 'background: linear-gradient(135deg, #1DA1F2, #1a8917); color: white; box-shadow: 0 4px 12px rgba(29,161,242,0.3);',
-                                'instagram' => 'background: linear-gradient(135deg, #F58529, #DD2A7B, #8134AF, #515BD4); color: white; box-shadow: 0 4px 12px rgba(245,133,41,0.3);',
-                                'linkedin' => 'background: linear-gradient(135deg, #0A66C2, #004182); color: white; box-shadow: 0 4px 12px rgba(10,102,194,0.3);',
-                                'youtube' => 'background: linear-gradient(135deg, #FF0000, #C4302B); color: white; box-shadow: 0 4px 12px rgba(255,0,0,0.2);',
-                                'whatsapp' => 'background: linear-gradient(135deg, #25D366, #128C7E); color: white; box-shadow: 0 4px 12px rgba(37,211,102,0.2);',
-                            ];
                         @endphp
                         @foreach($social as $key => $link)
                             @if($link && trim($link) !== '')
-                                <a href="{{ $key === 'whatsapp' ? 'https://wa.me/' . $link : $link }}" target="_blank" rel="noopener" aria-label="{{ $key }}" title="تابعنا على {{ $key }}"
-                                   style="animation: zoomIn 0.6s ease-out 0.{{ $loop->index + 4 }}s backwards; display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: 50%; {{ $styles[$key] ?? '' }} transition: all 0.3s ease;">
-                                    <i class="bi bi-{{ $icons[$key] }}" style="font-size: 1.5rem;"></i>
+                                <a href="{{ $key === 'whatsapp' ? 'https://wa.me/' . $link : $link }}"
+                                   target="_blank"
+                                   rel="noopener"
+                                   aria-label="{{ $key }}"
+                                   title="تابعنا على {{ $key }}"
+                                   class="social-icon social-icon--{{ $key }} reveal-zoom delay-{{ $loop->index + 3 }}">
+                                    <i class="bi bi-{{ $icons[$key] }}"></i>
                                 </a>
                             @endif
                         @endforeach

@@ -127,7 +127,7 @@
 
     @push('scripts')
         <script>
-            // يمكن إضافة محرر نصوص غني هنا إذا أردت (مثل TinyMCE أو CKEditor)
+            // You can add a rich text editor here if you want (e.g., TinyMCE or CKEditor)
             document.addEventListener('DOMContentLoaded', function() {
                 const textarea = document.getElementById('content');
                 if (textarea) {
